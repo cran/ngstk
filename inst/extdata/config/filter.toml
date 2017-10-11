@@ -1,0 +1,15 @@
+Title = "Proteinpaint configuration file"
+
+[fusions_filter.meta.defined_cols]
+colnames = ["gene5", "gene3", "fusion_type"]
+hander_lib = "default_handers"
+mhander_lib = "default_mhanders"
+
+[fusions_filter.format.common.gene5]
+alias = ["gene5", "gene_a", "Gene_1_symbol.5end_fusion_partner."]
+
+[fusions_filter.format.common.gene3]
+alias = ["gene3", "gene_b", "Gene_2_symbol.3end_fusion_partner."]
+
+[fusions_filter.format.common.fusion_type]
+alias = ["fusion_type", "predicted_effect"]

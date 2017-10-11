@@ -1,0 +1,131 @@
+Title = "cBioportal configuration file"
+
+# muts2mutation_mapper is a function that can convert mutation data to cBioportal Oncoprinter input format
+[muts2oncoprinter.meta.defined_cols]
+colnames = ["Sample", "Gene", "Alteration", "Type"]
+hander_lib = "default_handers"
+mhander_lib = "default_mhanders"
+[muts2oncoprinter.meta.defined_cols.description]
+Sample="Sample ID"
+Gene="Gene symbol (or other gene identifier)"
+Alteration="Definition of the alteration event. Mutation event: amino acid change or any other information about the mutation"
+Type="Definition of the alteration type. It has to be one of the following. MISSENSE: a missense mutation, INFRAME: a inframe mutation, TRUNC: a truncation mutation"
+
+[muts2oncoprinter.format.iseq.Sample]
+alias = ["sample", "patient.id", "patient"]
+
+[muts2oncoprinter.format.iseq.Gene]
+alias = ["gene", "symbol"]
+
+[muts2oncoprinter.format.iseq.Alteration]
+alias = ["aachange", "amino.acid.change"]
+extract_pattern = "p[.]+.*$"
+replace_pattern = "p."
+replace_string = ""
+
+[muts2oncoprinter.format.iseq.Type]
+alias = ["mutation_type", "mutation.type"]
+raw = ["missense", "nonframeshift ins", "nonframeshift del",
+       "frameshift ins", "frameshift del", "stoploss", "nonsense",
+			 "splice"]
+new = ["MISSENSE", "INFRAME", "INFRAME", "TRUNC", "TRUNC",
+       "TRUNC", "TRUNC", "TRUNC"]
+na_replace = "TRUNC"
+
+# muts2mutation_mapper is a function that can convert mutation data to cBioportal MutationMapper input format
+[muts2mutation_mapper.meta.defined_cols]
+colnames = ["Hugo_Symbol", "Sample_ID", "Protein_Change", "Mutation_Type",
+            "Chromosome", "Start_Position", "End_Position", "Reference_Allele", "Variant_Allele",
+            "Validation_Status", "Mutation_Status", "Center"]
+hander_lib = "default_handers"
+mhander_lib = "default_mhanders"
+[muts2mutation_mapper.meta.defined_cols.description]
+Hugo_Symbol = "HUGO symbol for the gene, TP53"
+Protein_Change = "Amino acid change	V600E"
+Sample_ID = "Tumor sample ID	TCGA-B5-A11E"
+Mutation_Type =	"Translational effect of variant allele	Missense_Mutation, Nonsense_Mutation, etc."
+Chromosome =	"Chromosome number	X, Y, M, 1, 2, etc."
+Start_Position =	"Lowest numeric position of the reported variant on the genomic reference sequence	666"
+End_Position =	"Highest numeric position of the reported variant on the genomic reference sequence	667"
+Reference_Allele =	"The plus strand reference allele at this position	A"
+Variant_Allele =	"Tumor sequencing (discovery) allele	C"
+Validation_Status =	"Second pass results from orthogonal technology	Valid"
+Mutation_Status =	"Mutation status	Somatic, Germline, etc."
+Center =	"Center/Institute reporting the variant	mskcc.org"
+
+[muts2mutation_mapper.format.iseq.Hugo_Symbol]
+alias = ["gene", "symbol"]
+
+[muts2mutation_mapper.format.iseq.Sample_ID]
+alias = ["sample", "patient.id", "patient"]
+
+[muts2mutation_mapper.format.iseq.Protein_Change]
+alias = ["aachange", "amino.acid.change"]
+extract_pattern = "p[.]+.*$"
+replace_pattern = "p."
+replace_string = ""
+
+[muts2mutation_mapper.format.iseq.Mutation_Type]
+alias = ["mutation_type", "mutation.type"]
+raw = ["missense", "nonframeshift ins", "nonframeshift del",
+       "frameshift ins", "frameshift del", "stoploss", "nonsense",
+			 "splice"]
+new = ["Missense_Mutation", "In_Frame_Ins", "In_Frame_Del", "Frame_Shift_Ins", "Frame_Shift_Del",
+       "Nonsense_Mutation", "Nonsense_Mutation", "Splice_Site"]
+na_replace = "Splice_Site"
+
+[muts2mutation_mapper.format.iseq.Chromosome]
+alias = ["chromosome"]
+
+[muts2mutation_mapper.format.iseq.Start_Position]
+alias = ["start"]
+
+[muts2mutation_mapper.format.iseq.End_Position]
+alias = ["end"]
+
+[muts2mutation_mapper.format.iseq.Reference_Allele]
+alias = ["base.change"]
+extract_pattern = ".*>"
+replace_pattern = ">"
+replace_string = ""
+
+[muts2mutation_mapper.format.iseq.Variant_Allele]
+alias = ["base.change"]
+extract_pattern = ">.*"
+replace_pattern = ">"
+replace_string = ""
+
+[muts2mutation_mapper.format.iseq.Validation_Status]
+alias = ["validation_status"]
+
+[muts2mutation_mapper.format.iseq.Mutation_Status]
+alias = ["mutation_status"]
+
+[muts2mutation_mapper.format.iseq.center]
+alias = ["center"]
+
+# fusions2oncoprinter is a function that can convert fusions data to cBioportal Oncoprinter input format
+[fusions2oncoprinter.meta.defined_cols]
+colnames = ["Sample", "Gene_a", "Gene_b", "Alteration", "Type"]
+hander_lib = "default_handers"
+mhander_lib = "default_mhanders"
+[fusions2oncoprinter.meta.defined_cols.description]
+Sample="Sample ID"
+Gene="Gene symbol (or other gene identifier)"
+Alteration="Definition of the alteration event. Mutation event: amino acid change or any other information about the mutation"
+Type="Definition of the alteration type. It has to be one of the following. MISSENSE: a missense mutation, INFRAME: a inframe mutation, TRUNC: a truncation mutation"
+
+[fusions2oncoprinter.format.fusioncatcher.Sample]
+alias = ["sample", "patient.id", "patient", "SampleName"]
+
+[fusions2oncoprinter.format.fusioncatcher.Gene_a]
+alias = ["gene_a", "Gene_1_symbol.5end_fusion_partner."]
+
+[fusions2oncoprinter.format.fusioncatcher.Gene_b]
+alias = ["gene_b", "Gene_2_symbol.3end_fusion_partner."]
+
+[fusions2oncoprinter.format.fusioncatcher.Alteration]
+default_value = "FUSION"
+
+[fusions2oncoprinter.format.fusioncatcher.Type]
+default_value = "FUSION"

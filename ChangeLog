@@ -1,0 +1,23 @@
+2017-10-11 Li Jianfeng <lee_jianfeng@sjtu.edu.cn>
+                * control flag be added in extra_params of hander and mhander
+                * QualityConfirm be added in inst/extdata/tools/
+
+2017-10-10 Li Jianfeng <lee_jianfeng@sjtu.edu.cn>
+                * muts2mutation_mapper, muts2oncoprinter and fusions2oncoprinter be added in R/cbioportal_trasefer.R
+                * inst/extdata/config/cbioportal.toml be added
+                * reducing redundant code
+
+2017-09-30 Li Jianfeng <lee_jianfeng@sjtu.edu.cn>
+
+                * R/hander.R, R/mhander.R and R/filter.R be added
+                * inst/extdata/config/filter.toml, hander.toml be added
+                * hander and mhander functions be added
+                * rename mut2pp and fusion2pp
+                * inst/extdata/config/hander.toml and mhander.toml be added
+                * hander_confg_file and mhander_confg_file API be added
+                * show_handers and show_mhanders be added
+
+2017-09-29 Li Jianfeng <lee_jianfeng@sjtu.edu.cn>
+
+                * age, gender and fusions format of proteinpaint be added in R/proteinpaint_utils.R
+                * mut2pp, fusion2pp and fusion2pp_meta be added in R/proteinpaint_transefer.R

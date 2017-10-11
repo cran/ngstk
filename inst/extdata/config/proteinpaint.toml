@@ -1,0 +1,154 @@
+Title = "Proteinpaint configuration file"
+
+# muts2pp is a function that can convert mutation data to Proteinpaint input format
+[muts2pp.meta.defined_cols]
+colnames = ["gene", "refseq", "chromosome", "start", "aachange", "class", "disease", "sample"]
+hander_lib = "default_handers"
+mhander_lib = "default_mhanders"
+[muts2pp.meta.defined_cols.description]
+gene = "Gene symbol, e.g TP53, PTEN"
+refseq = "Transcript of refSeq or Ensemble, e.g NM_000546, ENST00000635293"
+chromosome = "Chromosome, e.g. chr1, chr2"
+start = "Chromosome start location of a mutation site, e.g. 153249385"
+aachange = "Amino acid level change of gene mutation, e.g. p.R347C, p.L615delinsDL"
+class = "Mutation type, e.g. nonsense, proteinIns, proteinDel, frameshift"
+disease = "Disease name or sample group name, e.g. B-ALL, T-ALL, G1, G2"
+sample = "Sample name"
+
+[muts2pp.format.iseq.gene]
+alias = ["gene", "symbol"]
+
+[muts2pp.format.iseq.refseq]
+alias = ["refseq", "transcription.id"]
+
+[muts2pp.format.iseq.chromosome]
+alias = ["chromosome"]
+
+[muts2pp.format.iseq.start]
+alias = ["start"]
+
+[muts2pp.format.iseq.aachange]
+alias = ["aachange", "amino.acid.change"]
+extract_pattern = "p[.]+.*$"
+
+[muts2pp.format.iseq.class]
+alias = ["mutation_type", "mutation.type"]
+raw = ["nonframeshift ins", "nonframeshift del",
+       "frameshift ins", "frameshift del", "stoploss", "nonsense",
+			 "splice"]
+new = ["proteinIns", "proteinDel", "frameshift", "frameshift",
+       "nonsense", "nonsense", "splice"]
+na_replace = "splice"
+
+[muts2pp.format.iseq.disease]
+alias = ["disease"]
+
+[muts2pp.format.iseq.sample]
+alias = ["sample", "patient.id", "patient"]
+
+[fusions2pp.meta.defined_cols]
+colnames = ["disease", "sampletype", "gene_a", "refseq_a",
+            "chr_a", "position_a", 	"gene_b",	"refseq_b", "chr_b",
+            "position_b",  "strand_a", "strand_b", "patient"]
+hander_lib = "default_handers"
+mhander_lib = "default_mhanders"
+[fusions2pp.meta.defined_cols.description]
+disease = "Disease type, e.g. B-ALL, T-ALL, AML"
+sampletype = "Sample group information ,e.g diagnosis, relapse"
+gene_a = "gene on 5' end of a fusion. Do not apply value for intergenic break-end."
+refseq_a = "The RefSeq/Ensembl accession of gene_a. Leave blank for intergenic break-end."
+chr_a = "Chromosome name of gene_a. In case of intergenic translocation, use the 5' end of the break point. Use name 'chr10' but not '10'."
+position_a = "Chromosomal position of the 5' end break point, 0-based."
+gene_b = "Gene on 3' end of a fusion. In case of intergenic translocation, leave unspecified."
+refseq_b = "The RefSeq/Ensembl accession of gene_b. Leave blank for intergenic break-end."
+chr_b = "Chromosome name of gene_b. In case of intergenic translocation, use the 3' end of the break point."
+position_b = "Chromosomal position of the 3' end break point, 0-based."
+strand_a = "+ or -"
+strand_b = "+ or -"
+patient = "Patient samplename"
+
+[fusions2pp.format.fusioncatcher.disease]
+alias = ["disease"]
+
+[fusions2pp.format.fusioncatcher.sampletype]
+alias = ["sampletype", "sample.type", "sample_type"]
+
+[fusions2pp.format.fusioncatcher.gene_a]
+alias = ["gene_a", "Gene_1_symbol.5end_fusion_partner."]
+
+[fusions2pp.format.fusioncatcher.gene_b]
+alias = ["gene_b", "Gene_2_symbol.3end_fusion_partner."]
+
+[fusions2pp.format.fusioncatcher.refseq_a]
+alias = ["refseq_a", "Gene_1_id.5end_fusion_partner."]
+
+[fusions2pp.format.fusioncatcher.refseq_b]
+alias = ["refseq_b", "Gene_2_id.3end_fusion_partner."]
+
+[fusions2pp.format.fusioncatcher.chr_a]
+alias = ["chr_a", "Fusion_point_for_gene_1.5end_fusion_partner."]
+split_marker = ":"
+split_index = "1"
+prefix_marker = "chr"
+lower = true
+
+[fusions2pp.format.fusioncatcher.chr_b]
+alias = ["chr_b", "Fusion_point_for_gene_2.3end_fusion_partner."]
+split_marker = ":"
+split_index = "1"
+prefix_marker = "chr"
+lower = true
+
+[fusions2pp.format.fusioncatcher.position_a]
+alias = ["position_a", "Fusion_point_for_gene_1.5end_fusion_partner."]
+split_marker = ":"
+split_index = "2"
+
+[fusions2pp.format.fusioncatcher.position_b]
+alias = ["position_b", "Fusion_point_for_gene_2.3end_fusion_partner."]
+split_marker = ":"
+split_index = "2"
+
+[fusions2pp.format.fusioncatcher.strand_a]
+alias = ["strand_a", "Fusion_point_for_gene_1.5end_fusion_partner."]
+split_marker = ":"
+split_index = "3"
+
+[fusions2pp.format.fusioncatcher.strand_b]
+alias = ["strand_b", "Fusion_point_for_gene_2.3end_fusion_partner."]
+split_marker = ":"
+split_index = "3"
+
+[fusions2pp.format.fusioncatcher.patient]
+alias = ["sample", "patient.id", "patient", "SampleName"]
+
+
+[fusions2pp_meta.meta.defined_cols]
+colnames = ["sample", "term", "group", "value", "color", "legendorder"]
+hander_lib = "default_handers"
+mhander_lib = "default_mhanders"
+[fusions2pp_meta.meta.defined_cols.description]
+sample = "Patient samplename"
+term = "Such as Age, Sex .etc."
+group = "Same with term"
+value = "The defined value"
+color = "Indicating the different value by different color"
+legendorder = "Legend order"
+
+[fusions2pp_meta.format.fusioncatcher.sample]
+alias = ["sample", "patient.id", "patient", "SampleName"]
+
+[fusions2pp_meta.format.fusioncatcher.term]
+alias = ["term"]
+
+[fusions2pp_meta.format.fusioncatcher.group]
+alias = ["group"]
+
+[fusions2pp_meta.format.fusioncatcher.value]
+alias = ["value"]
+
+[fusions2pp_meta.format.fusioncatcher.color]
+alias = ["color"]
+
+[fusions2pp_meta.format.fusioncatcher.legendorder]
+alias = ["legendorder"]
