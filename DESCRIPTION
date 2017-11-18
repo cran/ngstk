@@ -1,7 +1,7 @@
 Package: ngstk
 Type: Package
 Title: Next-Generation Sequencing (NGS) Data Analysis Toolkit
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: person("Jianfeng", "Li", email = "lee_jianfeng@sjtu.edu.cn", role = c("aut", "cre"))
 Description: 
     Can be used to facilitate the analysis of NGS data, such as visualization, conversion of data format for WEB service input and other purpose.
@@ -13,10 +13,11 @@ Encoding: UTF-8
 LazyData: true
 Imports: stringr (>= 1.2.0), configr (>= 0.3.1)
 RoxygenNote: 6.0.1
-Suggests: testthat
+Suggests: knitr, rmarkdown, testthat
+VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2017-10-11 14:59:39 UTC; ljf
+Packaged: 2017-11-18 14:52:17 UTC; ljf
 Author: Jianfeng Li [aut, cre]
 Maintainer: Jianfeng Li <lee_jianfeng@sjtu.edu.cn>
 Repository: CRAN
-Date/Publication: 2017-10-11 17:43:44 UTC
+Date/Publication: 2017-11-18 15:00:29 UTC

@@ -13,12 +13,14 @@
 #' show_handers(show_description = TRUE)
 #' show_handers(show_description = FALSE, show_all_funs = FALSE, 
 #'             show_code = 'handler_na_replace')
-show_handers <- function(hander_lib = "default_handers", show_all_funs = TRUE, show_code = NULL, show_description = FALSE, 
-  hander_confg_file = system.file("extdata", "config/hander.toml", package = "ngstk")) {
+show_handers <- function(hander_lib = "default_handers", show_all_funs = TRUE, show_code = NULL, 
+  show_description = FALSE, hander_confg_file = system.file("extdata", "config/hander.toml", 
+    package = "ngstk")) {
   hander_lib_data <- eval.config(value = hander_lib, config = "hander", file = hander_confg_file)
   if (show_all_funs) {
     hander_funs <- paste0(hander_lib_data[["hander_funs"]], collapse = ", ")
-    msg <- sprintf("%s were exists in file %s %s.", hander_funs, hander_confg_file, hander_lib)
+    msg <- sprintf("%s were exists in file %s %s.", hander_funs, hander_confg_file, 
+      hander_lib)
     message(paste0("[INFO] ", msg))
   }
   if (show_description) {
@@ -47,12 +49,14 @@ show_handers <- function(hander_lib = "default_handers", show_all_funs = TRUE, s
 #' show_mhanders(show_description = TRUE)
 #' show_mhanders(show_description = FALSE, show_all_funs = FALSE, 
 #'              show_code = 'mhander_fusions_anyfull_match')
-show_mhanders <- function(mhander_lib = "default_mhanders", show_all_funs = TRUE, show_code = NULL, show_description = FALSE, 
-  mhander_confg_file = system.file("extdata", "config/mhander.toml", package = "ngstk")) {
+show_mhanders <- function(mhander_lib = "default_mhanders", show_all_funs = TRUE, 
+  show_code = NULL, show_description = FALSE, mhander_confg_file = system.file("extdata", 
+    "config/mhander.toml", package = "ngstk")) {
   mhander_lib_data <- eval.config(value = mhander_lib, config = "mhander", file = mhander_confg_file)
   if (show_all_funs) {
     mhander_funs <- paste0(mhander_lib_data[["mhander_funs"]], collapse = ", ")
-    msg <- sprintf("%s were exists in file %s %s.", mhander_funs, mhander_confg_file, mhander_lib)
+    msg <- sprintf("%s were exists in file %s %s.", mhander_funs, mhander_confg_file, 
+      mhander_lib)
     message(paste0("[INFO] ", msg))
   }
   if (show_description) {
@@ -67,7 +71,8 @@ show_mhanders <- function(mhander_lib = "default_mhanders", show_all_funs = TRUE
 }
 
 # Function that can be uesd to process data
-handler <- function(hander_data, config_input, defined_cols, input_data, index, hander_funs = NULL, extra_params = NULL) {
+handler <- function(hander_data, config_input, defined_cols, input_data, index, hander_funs = NULL, 
+  extra_params = NULL) {
   defined_col <- defined_cols[index]
   valid_col_index <- get_valid_col_index(config_input, defined_cols[index], input_data)[1]
   old_op <- options()
@@ -75,7 +80,8 @@ handler <- function(hander_data, config_input, defined_cols, input_data, index, 
   if (is.na(valid_col_index)) {
     empty.col <- rep("NA", nrow(hander_data))
     hander_data <- cbind(hander_data, empty.col)
-    warning(sprintf("%s were not exists or not be recognize correctly in input data!", defined_col))
+    warning(sprintf("%s were not exists or not be recognize correctly in input data!", 
+      defined_col))
   } else {
     hander_data <- cbind(hander_data, input_data[[valid_col_index]])
   }
@@ -83,8 +89,8 @@ handler <- function(hander_data, config_input, defined_cols, input_data, index, 
   colnames(hander_data)[index] <- defined_col
   if (!is.null(hander_funs)) {
     for (i in hander_funs) {
-      hander_data <- do.call(i, list(hander_data = hander_data, config_input = config_input, defined_col = defined_col, 
-        index = index, extra_params = extra_params))
+      hander_data <- do.call(i, list(hander_data = hander_data, config_input = config_input, 
+        defined_col = defined_col, index = index, extra_params = extra_params))
     }
     
   }
@@ -144,7 +150,8 @@ handler_value_map <- function(hander_data, config_input, defined_col, index, ext
   }
   if (!is.null(raw_value)) {
     for (x in 1:length(raw_value)) {
-      hander_data[, index] <- str_replace(hander_data[, index], raw_value[x], new_value[x])
+      hander_data[, index] <- str_replace(hander_data[, index], raw_value[x], 
+        new_value[x])
     }
   }
   return(hander_data)
@@ -187,7 +194,8 @@ handler_split <- function(hander_data, config_input, defined_col, index, extra_p
   }
   split_index <- as.numeric(split_index)
   if (!is.null(split_marker)) {
-    hander_data[, index] <- sapply(str_split(hander_data[, index], split_marker), function(x) return(x[split_index]))
+    hander_data[, index] <- sapply(str_split(hander_data[, index], split_marker), 
+      function(x) return(x[split_index]))
   }
   return(hander_data)
 }
@@ -287,15 +295,16 @@ handler_replace <- function(hander_data, config_input, defined_col, index, extra
   }
   for (i in 1:length(replace_pattern)) {
     if (!is.null(replace_pattern[i])) {
-      hander_data[, index] <- str_replace(hander_data[, index], replace_pattern[i], replace_string[i])
+      hander_data[, index] <- str_replace(hander_data[, index], replace_pattern[i], 
+        replace_string[i])
     }
   }
   return(hander_data)
 }
 
 # default value
-handler_default_value <- function(hander_data, config_input, defined_col, index, extra_params = list(default_value = NULL, 
-  default_value_flag = TRUE)) {
+handler_default_value <- function(hander_data, config_input, defined_col, index, 
+  extra_params = list(default_value = NULL, default_value_flag = TRUE)) {
   flag <- extra_params$default_value_flag
   default_value <- extra_params$default_value
   if (!is.null(flag) && !flag) {

@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+<title>Introduction</title>
+
+<script type="text/javascript">
+window.onload = function() {
+  var imgs = document.getElementsByTagName('img'), i, img;
+  for (i = 0; i < imgs.length; i++) {
+    img = imgs[i];
+    // center an image if it is the only element of its parent
+    if (img.parentElement.childElementCount === 1)
+      img.parentElement.style.textAlign = 'center';
+  }
+};
+</script>
+
+<!-- Styles for R syntax highlighter -->
+<style type="text/css">
+   pre .operator,
+   pre .paren {
+     color: rgb(104, 118, 135)
+   }
+
+   pre .literal {
+     color: #990073
+   }
+
+   pre .number {
+     color: #099;
+   }
+
+   pre .comment {
+     color: #998;
+     font-style: italic
+   }
+
+   pre .keyword {
+     color: #900;
+     font-weight: bold
+   }
+
+   pre .identifier {
+     color: rgb(0, 0, 0);
+   }
+
+   pre .string {
+     color: #d14;
+   }
+</style>
+
+<!-- R syntax highlighter -->
+<script type="text/javascript">
+var hljs=new function(){function m(p){return p.replace(/&/gm,"&amp;").replace(/</gm,"&lt;")}function f(r,q,p){return RegExp(q,"m"+(r.cI?"i":"")+(p?"g":""))}function b(r){for(var p=0;p<r.childNodes.length;p++){var q=r.childNodes[p];if(q.nodeName=="CODE"){return q}if(!(q.nodeType==3&&q.nodeValue.match(/\s+/))){break}}}function h(t,s){var p="";for(var r=0;r<t.childNodes.length;r++){if(t.childNodes[r].nodeType==3){var q=t.childNodes[r].nodeValue;if(s){q=q.replace(/\n/g,"")}p+=q}else{if(t.childNodes[r].nodeName=="BR"){p+="\n"}else{p+=h(t.childNodes[r])}}}if(/MSIE [678]/.test(navigator.userAgent)){p=p.replace(/\r/g,"\n")}return p}function a(s){var r=s.className.split(/\s+/);r=r.concat(s.parentNode.className.split(/\s+/));for(var q=0;q<r.length;q++){var p=r[q].replace(/^language-/,"");if(e[p]){return p}}}function c(q){var p=[];(function(s,t){for(var r=0;r<s.childNodes.length;r++){if(s.childNodes[r].nodeType==3){t+=s.childNodes[r].nodeValue.length}else{if(s.childNodes[r].nodeName=="BR"){t+=1}else{if(s.childNodes[r].nodeType==1){p.push({event:"start",offset:t,node:s.childNodes[r]});t=arguments.callee(s.childNodes[r],t);p.push({event:"stop",offset:t,node:s.childNodes[r]})}}}}return t})(q,0);return p}function k(y,w,x){var q=0;var z="";var s=[];function u(){if(y.length&&w.length){if(y[0].offset!=w[0].offset){return(y[0].offset<w[0].offset)?y:w}else{return w[0].event=="start"?y:w}}else{return y.length?y:w}}function t(D){var A="<"+D.nodeName.toLowerCase();for(var B=0;B<D.attributes.length;B++){var C=D.attributes[B];A+=" "+C.nodeName.toLowerCase();if(C.value!==undefined&&C.value!==false&&C.value!==null){A+='="'+m(C.value)+'"'}}return A+">"}while(y.length||w.length){var v=u().splice(0,1)[0];z+=m(x.substr(q,v.offset-q));q=v.offset;if(v.event=="start"){z+=t(v.node);s.push(v.node)}else{if(v.event=="stop"){var p,r=s.length;do{r--;p=s[r];z+=("</"+p.nodeName.toLowerCase()+">")}while(p!=v.node);s.splice(r,1);while(r<s.length){z+=t(s[r]);r++}}}}return z+m(x.substr(q))}function j(){function q(x,y,v){if(x.compiled){return}var u;var s=[];if(x.k){x.lR=f(y,x.l||hljs.IR,true);for(var w in x.k){if(!x.k.hasOwnProperty(w)){continue}if(x.k[w] instanceof Object){u=x.k[w]}else{u=x.k;w="keyword"}for(var r in u){if(!u.hasOwnProperty(r)){continue}x.k[r]=[w,u[r]];s.push(r)}}}if(!v){if(x.bWK){x.b="\\b("+s.join("|")+")\\s"}x.bR=f(y,x.b?x.b:"\\B|\\b");if(!x.e&&!x.eW){x.e="\\B|\\b"}if(x.e){x.eR=f(y,x.e)}}if(x.i){x.iR=f(y,x.i)}if(x.r===undefined){x.r=1}if(!x.c){x.c=[]}x.compiled=true;for(var t=0;t<x.c.length;t++){if(x.c[t]=="self"){x.c[t]=x}q(x.c[t],y,false)}if(x.starts){q(x.starts,y,false)}}for(var p in e){if(!e.hasOwnProperty(p)){continue}q(e[p].dM,e[p],true)}}function d(B,C){if(!j.called){j();j.called=true}function q(r,M){for(var L=0;L<M.c.length;L++){if((M.c[L].bR.exec(r)||[null])[0]==r){return M.c[L]}}}function v(L,r){if(D[L].e&&D[L].eR.test(r)){return 1}if(D[L].eW){var M=v(L-1,r);return M?M+1:0}return 0}function w(r,L){return L.i&&L.iR.test(r)}function K(N,O){var M=[];for(var L=0;L<N.c.length;L++){M.push(N.c[L].b)}var r=D.length-1;do{if(D[r].e){M.push(D[r].e)}r--}while(D[r+1].eW);if(N.i){M.push(N.i)}return f(O,M.join("|"),true)}function p(M,L){var N=D[D.length-1];if(!N.t){N.t=K(N,E)}N.t.lastIndex=L;var r=N.t.exec(M);return r?[M.substr(L,r.index-L),r[0],false]:[M.substr(L),"",true]}function z(N,r){var L=E.cI?r[0].toLowerCase():r[0];var M=N.k[L];if(M&&M instanceof Array){return M}return false}function F(L,P){L=m(L);if(!P.k){return L}var r="";var O=0;P.lR.lastIndex=0;var M=P.lR.exec(L);while(M){r+=L.substr(O,M.index-O);var N=z(P,M);if(N){x+=N[1];r+='<span class="'+N[0]+'">'+M[0]+"</span>"}else{r+=M[0]}O=P.lR.lastIndex;M=P.lR.exec(L)}return r+L.substr(O,L.length-O)}function J(L,M){if(M.sL&&e[M.sL]){var r=d(M.sL,L);x+=r.keyword_count;return r.value}else{return F(L,M)}}function I(M,r){var L=M.cN?'<span class="'+M.cN+'">':"";if(M.rB){y+=L;M.buffer=""}else{if(M.eB){y+=m(r)+L;M.buffer=""}else{y+=L;M.buffer=r}}D.push(M);A+=M.r}function G(N,M,Q){var R=D[D.length-1];if(Q){y+=J(R.buffer+N,R);return false}var P=q(M,R);if(P){y+=J(R.buffer+N,R);I(P,M);return P.rB}var L=v(D.length-1,M);if(L){var O=R.cN?"</span>":"";if(R.rE){y+=J(R.buffer+N,R)+O}else{if(R.eE){y+=J(R.buffer+N,R)+O+m(M)}else{y+=J(R.buffer+N+M,R)+O}}while(L>1){O=D[D.length-2].cN?"</span>":"";y+=O;L--;D.length--}var r=D[D.length-1];D.length--;D[D.length-1].buffer="";if(r.starts){I(r.starts,"")}return R.rE}if(w(M,R)){throw"Illegal"}}var E=e[B];var D=[E.dM];var A=0;var x=0;var y="";try{var s,u=0;E.dM.buffer="";do{s=p(C,u);var t=G(s[0],s[1],s[2]);u+=s[0].length;if(!t){u+=s[1].length}}while(!s[2]);if(D.length>1){throw"Illegal"}return{r:A,keyword_count:x,value:y}}catch(H){if(H=="Illegal"){return{r:0,keyword_count:0,value:m(C)}}else{throw H}}}function g(t){var p={keyword_count:0,r:0,value:m(t)};var r=p;for(var q in e){if(!e.hasOwnProperty(q)){continue}var s=d(q,t);s.language=q;if(s.keyword_count+s.r>r.keyword_count+r.r){r=s}if(s.keyword_count+s.r>p.keyword_count+p.r){r=p;p=s}}if(r.language){p.second_best=r}return p}function i(r,q,p){if(q){r=r.replace(/^((<[^>]+>|\t)+)/gm,function(t,w,v,u){return w.replace(/\t/g,q)})}if(p){r=r.replace(/\n/g,"<br>")}return r}function n(t,w,r){var x=h(t,r);var v=a(t);var y,s;if(v){y=d(v,x)}else{return}var q=c(t);if(q.length){s=document.createElement("pre");s.innerHTML=y.value;y.value=k(q,c(s),x)}y.value=i(y.value,w,r);var u=t.className;if(!u.match("(\\s|^)(language-)?"+v+"(\\s|$)")){u=u?(u+" "+v):v}if(/MSIE [678]/.test(navigator.userAgent)&&t.tagName=="CODE"&&t.parentNode.tagName=="PRE"){s=t.parentNode;var p=document.createElement("div");p.innerHTML="<pre><code>"+y.value+"</code></pre>";t=p.firstChild.firstChild;p.firstChild.cN=s.cN;s.parentNode.replaceChild(p.firstChild,s)}else{t.innerHTML=y.value}t.className=u;t.result={language:v,kw:y.keyword_count,re:y.r};if(y.second_best){t.second_best={language:y.second_best.language,kw:y.second_best.keyword_count,re:y.second_best.r}}}function o(){if(o.called){return}o.called=true;var r=document.getElementsByTagName("pre");for(var p=0;p<r.length;p++){var q=b(r[p]);if(q){n(q,hljs.tabReplace)}}}function l(){if(window.addEventListener){window.addEventListener("DOMContentLoaded",o,false);window.addEventListener("load",o,false)}else{if(window.attachEvent){window.attachEvent("onload",o)}else{window.onload=o}}}var e={};this.LANGUAGES=e;this.highlight=d;this.highlightAuto=g;this.fixMarkup=i;this.highlightBlock=n;this.initHighlighting=o;this.initHighlightingOnLoad=l;this.IR="[a-zA-Z][a-zA-Z0-9_]*";this.UIR="[a-zA-Z_][a-zA-Z0-9_]*";this.NR="\\b\\d+(\\.\\d+)?";this.CNR="\\b(0[xX][a-fA-F0-9]+|(\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)";this.BNR="\\b(0b[01]+)";this.RSR="!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|\\.|-|-=|/|/=|:|;|<|<<|<<=|<=|=|==|===|>|>=|>>|>>=|>>>|>>>=|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~";this.ER="(?![\\s\\S])";this.BE={b:"\\\\.",r:0};this.ASM={cN:"string",b:"'",e:"'",i:"\\n",c:[this.BE],r:0};this.QSM={cN:"string",b:'"',e:'"',i:"\\n",c:[this.BE],r:0};this.CLCM={cN:"comment",b:"//",e:"$"};this.CBLCLM={cN:"comment",b:"/\\*",e:"\\*/"};this.HCM={cN:"comment",b:"#",e:"$"};this.NM={cN:"number",b:this.NR,r:0};this.CNM={cN:"number",b:this.CNR,r:0};this.BNM={cN:"number",b:this.BNR,r:0};this.inherit=function(r,s){var p={};for(var q in r){p[q]=r[q]}if(s){for(var q in s){p[q]=s[q]}}return p}}();hljs.LANGUAGES.cpp=function(){var a={keyword:{"false":1,"int":1,"float":1,"while":1,"private":1,"char":1,"catch":1,"export":1,virtual:1,operator:2,sizeof:2,dynamic_cast:2,typedef:2,const_cast:2,"const":1,struct:1,"for":1,static_cast:2,union:1,namespace:1,unsigned:1,"long":1,"throw":1,"volatile":2,"static":1,"protected":1,bool:1,template:1,mutable:1,"if":1,"public":1,friend:2,"do":1,"return":1,"goto":1,auto:1,"void":2,"enum":1,"else":1,"break":1,"new":1,extern:1,using:1,"true":1,"class":1,asm:1,"case":1,typeid:1,"short":1,reinterpret_cast:2,"default":1,"double":1,register:1,explicit:1,signed:1,typename:1,"try":1,"this":1,"switch":1,"continue":1,wchar_t:1,inline:1,"delete":1,alignof:1,char16_t:1,char32_t:1,constexpr:1,decltype:1,noexcept:1,nullptr:1,static_assert:1,thread_local:1,restrict:1,_Bool:1,complex:1},built_in:{std:1,string:1,cin:1,cout:1,cerr:1,clog:1,stringstream:1,istringstream:1,ostringstream:1,auto_ptr:1,deque:1,list:1,queue:1,stack:1,vector:1,map:1,set:1,bitset:1,multiset:1,multimap:1,unordered_set:1,unordered_map:1,unordered_multiset:1,unordered_multimap:1,array:1,shared_ptr:1}};return{dM:{k:a,i:"</",c:[hljs.CLCM,hljs.CBLCLM,hljs.QSM,{cN:"string",b:"'\\\\?.",e:"'",i:"."},{cN:"number",b:"\\b(\\d+(\\.\\d*)?|\\.\\d+)(u|U|l|L|ul|UL|f|F)"},hljs.CNM,{cN:"preprocessor",b:"#",e:"$"},{cN:"stl_container",b:"\\b(deque|list|queue|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array)\\s*<",e:">",k:a,r:10,c:["self"]}]}}}();hljs.LANGUAGES.r={dM:{c:[hljs.HCM,{cN:"number",b:"\\b0[xX][0-9a-fA-F]+[Li]?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+(?:[eE][+\\-]?\\d*)?L\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+\\.(?!\\d)(?:i\\b)?",e:hljs.IMMEDIATE_RE,r:1},{cN:"number",b:"\\b\\d+(?:\\.\\d*)?(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\.\\d+(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"keyword",b:"(?:tryCatch|library|setGeneric|setGroupGeneric)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\.",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\d+(?![\\w.])",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\b(?:function)",e:hljs.IMMEDIATE_RE,r:2},{cN:"keyword",b:"(?:if|in|break|next|repeat|else|for|return|switch|while|try|stop|warning|require|attach|detach|source|setMethod|setClass)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"literal",b:"(?:NA|NA_integer_|NA_real_|NA_character_|NA_complex_)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"literal",b:"(?:NULL|TRUE|FALSE|T|F|Inf|NaN)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"identifier",b:"[a-zA-Z.][a-zA-Z0-9._]*\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"<\\-(?!\\s*\\d)",e:hljs.IMMEDIATE_RE,r:2},{cN:"operator",b:"\\->|<\\-",e:hljs.IMMEDIATE_RE,r:1},{cN:"operator",b:"%%|~",e:hljs.IMMEDIATE_RE},{cN:"operator",b:">=|<=|==|!=|\\|\\||&&|=|\\+|\\-|\\*|/|\\^|>|<|!|&|\\||\\$|:",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"%",e:"%",i:"\\n",r:1},{cN:"identifier",b:"`",e:"`",r:0},{cN:"string",b:'"',e:'"',c:[hljs.BE],r:0},{cN:"string",b:"'",e:"'",c:[hljs.BE],r:0},{cN:"paren",b:"[[({\\])}]",e:hljs.IMMEDIATE_RE,r:0}]}};
+hljs.initHighlightingOnLoad();
+</script>
+
+
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 13px;
+}
+
+body {
+  max-width: 800px;
+  margin: auto;
+  padding: 1em;
+  line-height: 20px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 {
+   font-size:2.2em;
+}
+
+h2 {
+   font-size:1.8em;
+}
+
+h3 {
+   font-size:1.4em;
+}
+
+h4 {
+   font-size:1.0em;
+}
+
+h5 {
+   font-size:0.9em;
+}
+
+h6 {
+   font-size:0.8em;
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre, img {
+  max-width: 100%;
+}
+pre {
+  overflow-x: auto;
+}
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code {
+  font-size: 92%;
+  border: 1px solid #ccc;
+}
+
+code[class] {
+  background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * {
+      background: transparent !important;
+      color: black !important;
+      filter:none !important;
+      -ms-filter: none !important;
+   }
+
+   body {
+      font-size:12pt;
+      max-width:100%;
+   }
+
+   a, a:visited {
+      text-decoration: underline;
+   }
+
+   hr {
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote {
+      padding-right: 1em;
+      page-break-inside: avoid;
+   }
+
+   tr, img {
+      page-break-inside: avoid;
+   }
+
+   img {
+      max-width: 100% !important;
+   }
+
+   @page :left {
+      margin: 15mm 20mm 15mm 10mm;
+   }
+
+   @page :right {
+      margin: 15mm 10mm 15mm 20mm;
+   }
+
+   p, h2, h3 {
+      orphans: 3; widows: 3;
+   }
+
+   h2, h3 {
+      page-break-after: avoid;
+   }
+}
+</style>
+
+
+
+</head>
+
+<body>
+<h2>Introduction</h2>
+
+<p><a href="https://github.com/JhuangLab/ngstk">ngstk</a> is an R package to facilitate the analysis of NGS data, such as visualization, conversion of the data format for WEB service input and another purpose.</p>
+
+<p>You can learn some usage of ngstk through this tutorial.</p>
+
+<h2>Usage</h2>
+
+<h3>Data format conversion</h3>
+
+<p>We defined a rule to facilitate the data format conversion. It is a good choice to save the all of output colums meta information. Moreover, the other input data should establish a connection with the output colums according the requirement.</p>
+
+<ul>
+<li>alias, connect the two table by colnames</li>
+<li>extract_pattern, extract defined pattern from one of colum </li>
+<li>raw and new, repace the raw value with the new value</li>
+<li>na.replace, replace the NA value to defined value</li>
+</ul>
+
+<p>The follow example configuration file can be used to convert <a href="https://github.com/JhuangLab/iseq">iseq</a>, a pipeline to analysis genetic variants from NGS data, output data to the web service <a href="https://proteinpaint.stjude.org/">ProteinPaint</a>, a tool to visulize the mutation data. </p>
+
+<pre><code class="toml">Title = &quot;Proteinpaint configuration file&quot;
+
+# muts2pp is a function that can convert mutation data to Proteinpaint input format
+[muts2pp.meta.defined_cols]
+colnames = [&quot;gene&quot;, &quot;refseq&quot;, &quot;chromosome&quot;, &quot;start&quot;, &quot;aachange&quot;, &quot;class&quot;, &quot;disease&quot;, &quot;sample&quot;]
+hander_lib = &quot;default_handers&quot;
+mhander_lib = &quot;default_mhanders&quot;
+[muts2pp.meta.defined_cols.description]
+gene = &quot;Gene symbol, e.g TP53, PTEN&quot;
+refseq = &quot;Transcript of refSeq or Ensemble, e.g NM_000546, ENST00000635293&quot;
+chromosome = &quot;Chromosome, e.g. chr1, chr2&quot;
+start = &quot;Chromosome start location of a mutation site, e.g. 153249385&quot;
+aachange = &quot;Amino acid level change of gene mutation, e.g. p.R347C, p.L615delinsDL&quot;
+class = &quot;Mutation type, e.g. nonsense, proteinIns, proteinDel, frameshift&quot;
+disease = &quot;Disease name or sample group name, e.g. B-ALL, T-ALL, G1, G2&quot;
+sample = &quot;Sample name&quot;
+
+[muts2pp.format.iseq.gene]
+alias = [&quot;gene&quot;, &quot;symbol&quot;]
+
+[muts2pp.format.iseq.refseq]
+alias = [&quot;refseq&quot;, &quot;transcription.id&quot;]
+
+[muts2pp.format.iseq.chromosome]
+alias = [&quot;chromosome&quot;]
+
+[muts2pp.format.iseq.start]
+alias = [&quot;start&quot;]
+
+[muts2pp.format.iseq.aachange]
+alias = [&quot;aachange&quot;, &quot;amino.acid.change&quot;]
+extract_pattern = &quot;p[.]+.*$&quot;
+
+[muts2pp.format.iseq.class]
+alias = [&quot;mutation_type&quot;, &quot;mutation.type&quot;]
+raw = [&quot;nonframeshift ins&quot;, &quot;nonframeshift del&quot;,
+       &quot;frameshift ins&quot;, &quot;frameshift del&quot;, &quot;stoploss&quot;, &quot;nonsense&quot;,
+             &quot;splice&quot;]
+new = [&quot;proteinIns&quot;, &quot;proteinDel&quot;, &quot;frameshift&quot;, &quot;frameshift&quot;,
+       &quot;nonsense&quot;, &quot;nonsense&quot;, &quot;splice&quot;]
+na_replace = &quot;splice&quot;
+</code></pre>
+
+<p>muts2pp, muts2mutation_mapper, muts2oncoprinter and fusions2pp are the example functions based on the established rules.</p>
+
+<pre><code class="r">demo_file &lt;- system.file(&quot;extdata&quot;, &quot;demo/proteinpaint/muts2pp_iseq.txt&quot;, package = &quot;ngstk&quot;)
+input_data &lt;- read.table(demo_file, sep = &quot;\t&quot;, header = TRUE, stringsAsFactors = FALSE)
+disease &lt;- &quot;T-ALL&quot;
+input_data &lt;- data.frame(input_data, disease)
+input_data$disease &lt;- as.character(input_data$disease)
+
+# Convert mutations data to proteinpaint input
+result &lt;- muts2pp(input_data, input_type = &quot;iseq&quot;)
+head(result)
+#&gt;    gene       refseq chromosome     start aachange      class disease
+#&gt; 1  IDH1 NM_001282386       chr2 209113113  p.R132S   missense   T-ALL
+#&gt; 2 PTPRC    NM_080921       chr1 198711362  p.A694T   missense   T-ALL
+#&gt; 3 PTPRC    NM_080921       chr1 198685843 p.I281fs frameshift   T-ALL
+#&gt; 4  ASPM NM_001206846       chr1 197093449 p.L1061F   missense   T-ALL
+#&gt; 5  ASPM    NM_018136       chr1 197070987 p.Q2465R   missense   T-ALL
+#&gt; 6  FAT1    NM_005245       chr4 187630354  p.L210F   missense   T-ALL
+#&gt;   sample
+#&gt; 1     A1
+#&gt; 2     A2
+#&gt; 3     A3
+#&gt; 4     A4
+#&gt; 5     A5
+#&gt; 6     A6
+# Convert mutations data to cbioportal input
+result &lt;- muts2mutation_mapper(input_data, input_type = &quot;iseq&quot;)
+#&gt; Warning in handler(hander_data, config_input, defined_cols, input_data, :
+#&gt; Validation_Status were not exists or not be recognize correctly in input
+#&gt; data!
+#&gt; Warning in handler(hander_data, config_input, defined_cols, input_data, :
+#&gt; Mutation_Status were not exists or not be recognize correctly in input
+#&gt; data!
+#&gt; Warning in handler(hander_data, config_input, defined_cols, input_data, :
+#&gt; Center were not exists or not be recognize correctly in input data!
+head(result)
+#&gt;   Hugo_Symbol Sample_ID Protein_Change     Mutation_Type Chromosome
+#&gt; 1        IDH1        A1          R132S Missense_Mutation       chr2
+#&gt; 2       PTPRC        A2          A694T Missense_Mutation       chr1
+#&gt; 3       PTPRC        A3         I281fs   Frame_Shift_Ins       chr1
+#&gt; 4        ASPM        A4         L1061F Missense_Mutation       chr1
+#&gt; 5        ASPM        A5         Q2465R Missense_Mutation       chr1
+#&gt; 6        FAT1        A6          L210F Missense_Mutation       chr4
+#&gt;   Start_Position End_Position Reference_Allele Variant_Allele
+#&gt; 1      209113113    209113113                G              T
+#&gt; 2      198711362    198711362                G              A
+#&gt; 3      198685843    198685843                -              T
+#&gt; 4      197093449    197093449                G              A
+#&gt; 5      197070987    197070987                T              C
+#&gt; 6      187630354    187630354                G              A
+#&gt;   Validation_Status Mutation_Status Center
+#&gt; 1                NA              NA     NA
+#&gt; 2                NA              NA     NA
+#&gt; 3                NA              NA     NA
+#&gt; 4                NA              NA     NA
+#&gt; 5                NA              NA     NA
+#&gt; 6                NA              NA     NA
+result &lt;- muts2oncoprinter(input_data, input_type = &quot;iseq&quot;)
+head(result)
+#&gt;   Sample  Gene Alteration     Type
+#&gt; 1     A1  IDH1      R132S MISSENSE
+#&gt; 2     A2 PTPRC      A694T MISSENSE
+#&gt; 3     A3 PTPRC     I281fs    TRUNC
+#&gt; 4     A4  ASPM     L1061F MISSENSE
+#&gt; 5     A5  ASPM     Q2465R MISSENSE
+#&gt; 6     A6  FAT1      L210F MISSENSE
+
+demo_file &lt;- system.file(&#39;extdata&#39;, &#39;demo/proteinpaint/fusions2pp_fusioncatcher.txt&#39;, package = &#39;ngstk&#39;)
+input_data &lt;- read.table(demo_file, sep = &#39;\t&#39;, header = TRUE, stringsAsFactors = FALSE)
+disease &lt;- &#39;B-ALL&#39;
+sampletype &lt;- &#39;diagnose&#39;
+input_data &lt;- data.frame(input_data, disease, sampletype)
+input_data$disease &lt;- as.character(input_data$disease)
+# Convert fusions data to proteinpaint input
+result &lt;- fusions2pp(input_data, input_type = &#39;fusioncatcher&#39;)
+head(result)
+#&gt;   disease sampletype gene_a        refseq_a chr_a position_a gene_b
+#&gt; 1   B-ALL   diagnose   TCF3 ENSG00000071564 chr19    1619110   PBX1
+#&gt; 2   B-ALL   diagnose   TCF3 ENSG00000071564 chr19    1619110   PBX1
+#&gt; 3   B-ALL   diagnose   TCF3 ENSG00000071564 chr19    1619110   PBX1
+#&gt; 4   B-ALL   diagnose   TCF3 ENSG00000071564 chr19    1619110   PBX1
+#&gt; 5   B-ALL   diagnose   TCF3 ENSG00000071564 chr19    1619110   PBX1
+#&gt; 6   B-ALL   diagnose   GYPE ENSG00000197465  chr4  144801564   GYPA
+#&gt;          refseq_b chr_b position_b strand_a strand_b patient
+#&gt; 1 ENSG00000185630  chr1  164761731        -        +      A1
+#&gt; 2 ENSG00000185630  chr1  164761731        -        +      A2
+#&gt; 3 ENSG00000185630  chr1  164761731        -        +      A3
+#&gt; 4 ENSG00000185630  chr1  164704095        -        +      A4
+#&gt; 5 ENSG00000185630  chr1  164704095        -        +      A5
+#&gt; 6 ENSG00000170180  chr4  145040934        -        -      A6
+</code></pre>
+
+<p>merge_table_files is the another util function to merge multiple table files.</p>
+
+<pre><code class="r">a &lt;- data.frame(col1=1:6, col2=2:7)
+b &lt;- data.frame(col1=6:11, col2=1:6)
+file_a &lt;- paste0(tempfile(), &#39;_abcd&#39;)
+file_b &lt;- paste0(tempfile(), &#39;_abcd&#39;)
+write.table(a, file_a, sep = &#39;\t&#39;, row.names = FALSE)
+write.table(b, file_b, sep = &#39;\t&#39;, row.names = FALSE)
+input_files &lt;- c(file_a, file_b)
+x1 &lt;- merge_table_files(input_files = input_files)
+head(x1)
+#&gt;                                filename col1 col2
+#&gt; 1 /tmp/RtmpehBu9d/file7d4026977aba_abcd    1    2
+#&gt; 2 /tmp/RtmpehBu9d/file7d4026977aba_abcd    2    3
+#&gt; 3 /tmp/RtmpehBu9d/file7d4026977aba_abcd    3    4
+#&gt; 4 /tmp/RtmpehBu9d/file7d4026977aba_abcd    4    5
+#&gt; 5 /tmp/RtmpehBu9d/file7d4026977aba_abcd    5    6
+#&gt; 6 /tmp/RtmpehBu9d/file7d4026977aba_abcd    6    7
+x2 &lt;- merge_table_files(files_dir = tempdir(), pattern = &#39;.*_abcd$&#39;)
+head(x2)
+#&gt;                                filename col1 col2
+#&gt; 1 /tmp/RtmpehBu9d/file7d4026977aba_abcd    1    2
+#&gt; 2 /tmp/RtmpehBu9d/file7d4026977aba_abcd    2    3
+#&gt; 3 /tmp/RtmpehBu9d/file7d4026977aba_abcd    3    4
+#&gt; 4 /tmp/RtmpehBu9d/file7d4026977aba_abcd    4    5
+#&gt; 5 /tmp/RtmpehBu9d/file7d4026977aba_abcd    5    6
+#&gt; 6 /tmp/RtmpehBu9d/file7d4026977aba_abcd    6    7
+outfn = tempfile()
+x3 &lt;- merge_table_files(files_dir = tempdir(), pattern = &quot;.*_abcd$&quot;, outfn = outfn)
+head(read.table(outfn, sep = &quot;\t&quot;, header = TRUE))
+#&gt;                                filename col1 col2
+#&gt; 1 /tmp/RtmpehBu9d/file7d4026977aba_abcd    1    2
+#&gt; 2 /tmp/RtmpehBu9d/file7d4026977aba_abcd    2    3
+#&gt; 3 /tmp/RtmpehBu9d/file7d4026977aba_abcd    3    4
+#&gt; 4 /tmp/RtmpehBu9d/file7d4026977aba_abcd    4    5
+#&gt; 5 /tmp/RtmpehBu9d/file7d4026977aba_abcd    5    6
+#&gt; 6 /tmp/RtmpehBu9d/file7d4026977aba_abcd    6    7
+</code></pre>
+
+<h3>Data filtration</h3>
+
+<p>Data filtration or subset is an important step to clean or run the specific analysis. A series of data filtration function will be establish and fixed that can be re-used in the future.</p>
+
+<pre><code class="r">demo_file &lt;- system.file(&quot;extdata&quot;, &quot;demo/proteinpaint/fusions2pp_fusioncatcher.txt&quot;, package = &quot;ngstk&quot;)
+input_data &lt;- read.table(demo_file, sep = &quot;\t&quot;, header = TRUE, stringsAsFactors = FALSE)
+# Get data subset according the defined rule
+mhander_extra_params = list(gene_5 = 1, gene_3 = 2, any_gene = &quot;TCF3&quot;, fusions_any_match_flag = TRUE)
+result_1 &lt;- fusions_filter(input_data, mhander_extra_params = mhander_extra_params)
+head(result_1)
+#&gt;   gene5 gene3             fusion_type
+#&gt; 1  TCF3  PBX1                in-frame
+#&gt; 2  TCF3  PBX1                in-frame
+#&gt; 3  TCF3  PBX1                in-frame
+#&gt; 4  TCF3  PBX1 CDS(truncated)/intronic
+#&gt; 5  TCF3  PBX1 CDS(truncated)/intronic
+
+mhander_extra_params = list(gene_3 = 2, right_gene = &quot;GYPA&quot;, fusions_right_match_flag = TRUE)
+result_2 &lt;- fusions_filter(input_data, mhander_extra_params = mhander_extra_params)
+head(result_2)
+#&gt;   gene5 gene3 fusion_type
+#&gt; 6  GYPE  GYPA    in-frame
+#&gt; 7  GYPE  GYPA    in-frame
+
+mhander_extra_params = list(gene_5 = 1, left_gene = &quot;GYPA&quot;, fusions_left_match_flag = TRUE)
+result_3 &lt;- fusions_filter(input_data, mhander_extra_params = mhander_extra_params)
+head(result_3)
+#&gt; [1] gene5       gene3       fusion_type
+#&gt; &lt;0 rows&gt; (or 0-length row.names)
+
+mhander_extra_params = list(gene_5 = 1, gene_3 = 2, left_gene = &quot;GYPE&quot;, right_gene = &quot;GYPA&quot;, fusions_full_match_flag = TRUE)
+result_4 &lt;- fusions_filter(input_data, mhander_extra_params = mhander_extra_params)
+head(result_4)
+#&gt;   gene5 gene3 fusion_type
+#&gt; 6  GYPE  GYPA    in-frame
+#&gt; 7  GYPE  GYPA    in-frame
+
+mhander_extra_params = list(gene_5 = 1, gene_3 = 2, left_gene = &quot;GYPE&quot;, right_gene = &quot;GYPA&quot;, fusions_anyfull_match_flag = TRUE)
+result_5 &lt;- fusions_filter(input_data, mhander_extra_params = mhander_extra_params)
+head(result_5)
+#&gt;   gene5 gene3 fusion_type
+#&gt; 6  GYPE  GYPA    in-frame
+#&gt; 7  GYPE  GYPA    in-frame
+</code></pre>
+
+<h3>Log related</h3>
+
+<p>In the data analysis process, we usually need to check the create time and modification time of some result files, e.g. all of files create or change time are identical. ngstk provied <code>get_files_mtime</code> and <code>get_files_ctime</code> to process the files time check step. The default time check function is check all files time wheather are identical and you can use your own function.</p>
+
+<pre><code class="r">file_a &lt;- tempfile()
+file_b &lt;- tempfile()
+file.create(c(file_a, file_b))
+#&gt; [1] TRUE TRUE
+x &lt;- get_files_mtime(input_files = c(file_a, file_b))
+x
+#&gt; $files_mtime
+#&gt; [1] &quot;2017-11-18 22:52:16 CST&quot; &quot;2017-11-18 22:52:16 CST&quot;
+#&gt; 
+#&gt; $status
+#&gt; [1] TRUE
+x &lt;- get_files_mtime(input_files = c(file_a, file_b), return_check = FALSE)
+x
+#&gt; [1] &quot;2017-11-18 22:52:16 CST&quot; &quot;2017-11-18 22:52:16 CST&quot;
+x &lt;- get_files_mtime(input_files = c(file_a, file_b), return_mtime = FALSE)
+x
+#&gt; [1] TRUE
+x &lt;- get_files_ctime(input_files = c(file_a, file_b))
+x
+#&gt; $files_ctime
+#&gt; [1] &quot;2017-11-18 22:52:16 CST&quot; &quot;2017-11-18 22:52:16 CST&quot;
+#&gt; 
+#&gt; $status
+#&gt; [1] TRUE
+x &lt;- get_files_ctime(input_files = c(file_a, file_b), return_check = FALSE)
+x
+#&gt; [1] &quot;2017-11-18 22:52:16 CST&quot; &quot;2017-11-18 22:52:16 CST&quot;
+</code></pre>
+
+</body>
+
+</html>

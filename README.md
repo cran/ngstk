@@ -1,4 +1,4 @@
-# [![Build Status](https://travis-ci.org/JhuangLab/ngstk.svg)](https://travis-ci.org/JhuangLab/ngstk) [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat)](https://en.wikipedia.org/wiki/MIT_License) [![codecov](https://codecov.io/github/JhuangLab/ngstk/branch/master/graphs/badge.svg)](https://codecov.io/github/JhuangLab/ngstk)
+# [![Build Status](https://travis-ci.org/JhuangLab/ngstk.svg)](https://travis-ci.org/JhuangLab/ngstk) [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat)](https://en.wikipedia.org/wiki/MIT_License) [![CRAN](http://www.r-pkg.org/badges/version/ngstk)](https://cran.r-project.org/package=ngstk) [![Downloads](http://cranlogs.r-pkg.org/badges/ngstk?color=brightgreen)](http://www.r-pkg.org/pkg/ngstk) [![codecov](https://codecov.io/github/JhuangLab/ngstk/branch/master/graphs/badge.svg)](https://codecov.io/github/JhuangLab/ngstk)
 
 ngstk package
 ==============
@@ -40,15 +40,17 @@ devtools::install_github("JhuangLab/ngstk")
 ### Data format conversion
 
 ```r
-demo_file <- system.file('extdata', 'demo/proteinpaint/muts2pp_iseq.txt', package = 'ngstk')
-input_data <- read.table(demo_file, sep = '\t', header = TRUE, stringsAsFactors = FALSE)
-disease <- 'T-ALL'
+demo_file <- system.file("extdata", "demo/proteinpaint/muts2pp_iseq.txt", package = "ngstk")
+input_data <- read.table(demo_file, sep = "\t", header = TRUE, stringsAsFactors = FALSE)
+disease <- "T-ALL"
 input_data <- data.frame(input_data, disease)
 input_data$disease <- as.character(input_data$disease)
-# Convert mutation data to proteinpaint input
-muts2mutation_mapper(input_data, input_type = 'iseq')
-# Convert mutation data to cbioportal oncoprinter input
-muts2oncoprinter(input_data, input_type = 'iseq')
+
+# Convert mutations data to proteinpaint input
+result <- muts2pp(input_data, input_type = "iseq")
+# Convert mutations data to cbioportal input
+result <- muts2mutation_mapper(input_data, input_type = "iseq")
+result <- muts2oncoprinter(input_data, input_type = "iseq")
 
 demo_file <- system.file('extdata', 'demo/proteinpaint/fusions2pp_fusioncatcher.txt', package = 'ngstk')
 input_data <- read.table(demo_file, sep = '\t', header = TRUE, stringsAsFactors = FALSE)
@@ -86,11 +88,19 @@ result_5 <- fusions_filter(input_data, mhander_extra_params = mhander_extra_para
 
 ## Tools
 
-Some of non-core scripts or tools for NGS data analysis will be included in ngstk package. A defined markdown document will guide you to use it, such as [QualityConfirm](https://github.com/JhuangLab/ngstk/tree/master/inst/extdata/tools/QualityConfirm/README.md).
+Some of experimental or unpacked scripts or tools for NGS data analysis will be collected in ngstk package. A defined markdown document will tell you how to use it, such as [QualityConfirm](https://github.com/JhuangLab/ngstk/tree/master/inst/extdata/tools/QualityConfirm/README.md) and [gvmap](https://github.com/JhuangLab/ngstk/tree/master/inst/extdata/tools/gvmap/).
 
 ### QualityConfirm
 
 [QualityConfirm](https://github.com/JhuangLab/ngstk/tree/master/inst/extdata/tools/QualityConfirm/) is a quality control tool for gene panel sequencing data. Usage of QualityConfirm can be found in [QualityConfirm](https://github.com/JhuangLab/ngstk/tree/master/inst/extdata/tools/QualityConfirm/README.md) and the [demo](https://github.com/JhuangLab/ngstk/tree/master/inst/extdata/tools/QualityConfirm/demo.R) can help you to use it more easily.
+
+![](https://github.com/Miachol/ftp/raw/master/files/images/quality_confirm_fig1.png)
+
+### gvmap
+
+[gvmap](https://github.com/JhuangLab/ngstk/tree/master/inst/extdata/tools/gvmap/) is an R package to draw mutations and fusions heatmap. It relies on *configr*, *rsvg* R package. This package is an external tool that will be develop independently by [ytdai](https://github.com/ytdai/gvmap).
+
+![](https://github.com/Miachol/ftp/raw/master/files/images/gvmap_fig1.png)
 
 ## Theme
 
@@ -101,23 +111,28 @@ Title = "ngstk theme configuration file (colors)"
 
 [default]
 colors = ["#0073c3", "#efc000", "#696969",
-          "#ce534c", "#7ba6db", "#035892",
-          "#052135", "#666633", "#660000", "#990000"]
+"#ce534c", "#7ba6db", "#035892",
+"#052135", "#666633", "#660000", "#990000"]
 [red_blue]
 colors = ["#c20b01", "#196abd"]
 
 [proteinpaint_mutations]
 colors = ["#3987cc", "#ff7f0e", "#db3d3d", "#6633ff",
-          "#bbbbbb", "#9467bd", "#998199", "#8c564b", "#819981",
-          "#5781ff"]
+"#bbbbbb", "#9467bd", "#998199", "#8c564b", "#819981",
+"#5781ff"]
 
 [proteinpaint_domains]
 colors = ["#a6d854", "#8dd3c7", "#fb8072", "#80b1d3", "#bebada", "#e5c494", "#fdb462", "#b3b3b3"]
+
+[proteinpaint_chromHMM_state]
+colors = ["#c0222c", "#f12424", "#ff00c7", "#d192fb", "#f9982f", "#fcc88e",
+"#fbf876", "#a6d67b", "#1fb855", "#007d37", "#00a99e", "#11aaec",
+"#186db9", "#3800f8", "#961a8b", "#47005f"]
 
 [proteinpaint_significance]
 colors = ["#aaaaaa", "#e99002", "#5bc0de", "#f04124", "#90c3d4", "#f04124", "#43ac6a"]
 
 [adobe_color_cc_1]
 colors = ["#FFE350", "#E8740C", "#FF0000", "#9C0CE8", "#0D43FF",
-          "#A6B212", "#1991FF", "#ECFF00", "#CC1E14", "#B25C58"]
+"#A6B212", "#1991FF", "#ECFF00", "#CC1E14", "#B25C58"]
 ```
