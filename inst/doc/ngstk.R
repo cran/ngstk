@@ -83,3 +83,32 @@ x
 x <- get_files_ctime(input_files = c(file_a, file_b), return_check = FALSE)
 x
 
+## ------------------------------------------------------------------------
+x1 <- data.frame(col1 = 1:39, col2 = 1:39)
+x1
+x <- split_row_data(x1, sections = 2)
+x
+x <- split_row_data(x1, sections = 3)
+x
+x1 <- data.frame(col1 = 1:10, col2 = 11:20)
+x1.t <- t(x1)
+x <- split_col_data(x1.t, sections = 3)
+x
+# split file
+dat <- data.frame(col1 = 1:10000)
+outfn <- tempfile()
+write.table(dat, outfn, sep = "\t")
+split_row_file(outfn)
+
+## ------------------------------------------------------------------------
+files_dir <- system.file('extdata', 'demo/format', package = 'ngstk')
+pattern <- '*.txt'
+list.files(files_dir, pattern)
+x <- format_filenames(files_dir = files_dir, pattern = pattern, profix = 'hg38_')
+x
+
+## ------------------------------------------------------------------------
+set_colors('default')
+set_colors('proteinpaint_mutations')
+set_colors('proteinpaint_chromHMM_state')
+

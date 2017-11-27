@@ -12,6 +12,8 @@ In NGS data analysis process, a few of duplicated small scripts, colors theme al
 The purples of ngstk is that help us to manage those small scripts systematically, store some of the useful material for NGS data analysis.
 Especially, data visualization, conversion of data format and various database ID were the mainly mission in the recently development cycle.
 
+A simple guide can be found in [here](https://CRAN.R-project.org/package=ngstk/vignettes/ngstk.html).
+
 ## Installation
 
 ### CRAN
@@ -84,6 +86,53 @@ result_4 <- fusions_filter(input_data, mhander_extra_params = mhander_extra_para
 
 mhander_extra_params = list(gene_5 = 1, gene_3 = 2, left_gene = "GYPE", right_gene = "GYPA", fusions_anyfull_match_flag = TRUE)
 result_5 <- fusions_filter(input_data, mhander_extra_params = mhander_extra_params)
+```
+
+### Mtime and Ctime
+
+```r
+file_a <- tempfile()
+file_b <- tempfile()
+file.create(c(file_a, file_b))
+x1 <- get_files_mtime(input_files = c(file_a, file_b))
+x2 <- get_files_mtime(input_files = c(file_a, file_b), return_check = FALSE)
+x3 <- get_files_mtime(input_files = c(file_a, file_b), return_mtime = FALSE)
+x4 <- get_files_ctime(input_files = c(file_a, file_b))
+x5 <- get_files_ctime(input_files = c(file_a, file_b), return_check = FALSE)
+```
+
+### Data split
+
+```r
+x1 <- data.frame(col1 = 1:39, col2 = 1:39)
+x <- split_row_data(x1, sections = 2)
+x <- split_row_data(x1, sections = 3)
+x1 <- data.frame(col1 = 1:10, col2 = 11:20)
+x1.t <- t(x1)
+x <- split_col_data(x1.t, sections = 3)
+# split file
+dat <- data.frame(col1 = 1:10000)
+outfn <- tempfile()
+write.table(dat, outfn, sep = "\t")
+split_row_file(outfn)
+split_row_file(outfn, use_system_split = TRUE)
+```
+
+### Filename Process
+
+```r
+files_dir <- system.file('extdata', 'demo/format', package = 'ngstk')
+pattern <- '*.txt'
+list.files(files_dir, pattern)
+x <- format_filenames(files_dir = files_dir, pattern = pattern, profix = 'hg38_')
+```
+
+### Colors
+
+```r
+set_colors('default')
+set_colors('proteinpaint_mutations')
+set_colors('proteinpaint_chromHMM_state')
 ```
 
 ## Tools
