@@ -12,7 +12,7 @@
 
 <meta name="author" content="Jianfeng Li" />
 
-<meta name="date" content="2017-11-27" />
+<meta name="date" content="2018-01-04" />
 
 <title>Introduction to ngstk</title>
 
@@ -52,7 +52,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 
 <h1 class="title toc-ignore">Introduction to ngstk</h1>
 <h4 class="author"><em>Jianfeng Li</em></h4>
-<h4 class="date"><em>2017-11-27</em></h4>
+<h4 class="date"><em>2018-01-04</em></h4>
 
 
 
@@ -78,8 +78,8 @@ code > span.er { color: #ff0000; font-weight: bold; }
 # muts2pp is a function that can convert mutation data to Proteinpaint input format
 [muts2pp.meta.defined_cols]
 colnames = [&quot;gene&quot;, &quot;refseq&quot;, &quot;chromosome&quot;, &quot;start&quot;, &quot;aachange&quot;, &quot;class&quot;, &quot;disease&quot;, &quot;sample&quot;]
-hander_lib = &quot;default_handers&quot;
-mhander_lib = &quot;default_mhanders&quot;
+handler_lib = &quot;default_handlers&quot;
+mhandler_lib = &quot;default_mhandlers&quot;
 [muts2pp.meta.defined_cols.description]
 gene = &quot;Gene symbol, e.g TP53, PTEN&quot;
 refseq = &quot;Transcript of refSeq or Ensemble, e.g NM_000546, ENST00000635293&quot;
@@ -140,13 +140,13 @@ result &lt;-<span class="st"> </span><span class="kw">muts2pp</span>(input_data,
 <span class="co">#&gt; 6     A6</span>
 <span class="co"># Convert mutations data to cbioportal input</span>
 result &lt;-<span class="st"> </span><span class="kw">muts2mutation_mapper</span>(input_data, <span class="dt">input_type =</span> <span class="st">&quot;iseq&quot;</span>)
-<span class="co">#&gt; Warning in handler(hander_data, config_input, defined_cols, input_data, :</span>
+<span class="co">#&gt; Warning in handler(handler_data, config_input, defined_cols, input_data, :</span>
 <span class="co">#&gt; Validation_Status were not exists or not be recognize correctly in input</span>
 <span class="co">#&gt; data!</span>
-<span class="co">#&gt; Warning in handler(hander_data, config_input, defined_cols, input_data, :</span>
+<span class="co">#&gt; Warning in handler(handler_data, config_input, defined_cols, input_data, :</span>
 <span class="co">#&gt; Mutation_Status were not exists or not be recognize correctly in input</span>
 <span class="co">#&gt; data!</span>
-<span class="co">#&gt; Warning in handler(hander_data, config_input, defined_cols, input_data, :</span>
+<span class="co">#&gt; Warning in handler(handler_data, config_input, defined_cols, input_data, :</span>
 <span class="co">#&gt; Center were not exists or not be recognize correctly in input data!</span>
 <span class="kw">head</span>(result)
 <span class="co">#&gt;   Hugo_Symbol Sample_ID Protein_Change     Mutation_Type Chromosome</span>
@@ -213,32 +213,32 @@ file_b &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class=
 input_files &lt;-<span class="st"> </span><span class="kw">c</span>(file_a, file_b)
 x1 &lt;-<span class="st"> </span><span class="kw">merge_table_files</span>(<span class="dt">input_files =</span> input_files)
 <span class="kw">head</span>(x1)
-<span class="co">#&gt;                                filename col1 col2</span>
-<span class="co">#&gt; 1 /tmp/RtmpCymI5f/filefa3b4644f1ed_abcd    1    2</span>
-<span class="co">#&gt; 2 /tmp/RtmpCymI5f/filefa3b4644f1ed_abcd    2    3</span>
-<span class="co">#&gt; 3 /tmp/RtmpCymI5f/filefa3b4644f1ed_abcd    3    4</span>
-<span class="co">#&gt; 4 /tmp/RtmpCymI5f/filefa3b4644f1ed_abcd    4    5</span>
-<span class="co">#&gt; 5 /tmp/RtmpCymI5f/filefa3b4644f1ed_abcd    5    6</span>
-<span class="co">#&gt; 6 /tmp/RtmpCymI5f/filefa3b4644f1ed_abcd    6    7</span>
+<span class="co">#&gt;                                 filename col1 col2</span>
+<span class="co">#&gt; 1 /tmp/RtmpUrg5Db/file18ba97fafd4cf_abcd    1    2</span>
+<span class="co">#&gt; 2 /tmp/RtmpUrg5Db/file18ba97fafd4cf_abcd    2    3</span>
+<span class="co">#&gt; 3 /tmp/RtmpUrg5Db/file18ba97fafd4cf_abcd    3    4</span>
+<span class="co">#&gt; 4 /tmp/RtmpUrg5Db/file18ba97fafd4cf_abcd    4    5</span>
+<span class="co">#&gt; 5 /tmp/RtmpUrg5Db/file18ba97fafd4cf_abcd    5    6</span>
+<span class="co">#&gt; 6 /tmp/RtmpUrg5Db/file18ba97fafd4cf_abcd    6    7</span>
 x2 &lt;-<span class="st"> </span><span class="kw">merge_table_files</span>(<span class="dt">files_dir =</span> <span class="kw">tempdir</span>(), <span class="dt">pattern =</span> <span class="st">'.*_abcd$'</span>)
 <span class="kw">head</span>(x2)
 <span class="co">#&gt;                                filename col1 col2</span>
-<span class="co">#&gt; 1 /tmp/RtmpCymI5f/filefa3b4644f1ed_abcd    1    2</span>
-<span class="co">#&gt; 2 /tmp/RtmpCymI5f/filefa3b4644f1ed_abcd    2    3</span>
-<span class="co">#&gt; 3 /tmp/RtmpCymI5f/filefa3b4644f1ed_abcd    3    4</span>
-<span class="co">#&gt; 4 /tmp/RtmpCymI5f/filefa3b4644f1ed_abcd    4    5</span>
-<span class="co">#&gt; 5 /tmp/RtmpCymI5f/filefa3b4644f1ed_abcd    5    6</span>
-<span class="co">#&gt; 6 /tmp/RtmpCymI5f/filefa3b4644f1ed_abcd    6    7</span>
+<span class="co">#&gt; 1 /tmp/RtmpUrg5Db/file18ba912b1fa1_abcd    6    1</span>
+<span class="co">#&gt; 2 /tmp/RtmpUrg5Db/file18ba912b1fa1_abcd    7    2</span>
+<span class="co">#&gt; 3 /tmp/RtmpUrg5Db/file18ba912b1fa1_abcd    8    3</span>
+<span class="co">#&gt; 4 /tmp/RtmpUrg5Db/file18ba912b1fa1_abcd    9    4</span>
+<span class="co">#&gt; 5 /tmp/RtmpUrg5Db/file18ba912b1fa1_abcd   10    5</span>
+<span class="co">#&gt; 6 /tmp/RtmpUrg5Db/file18ba912b1fa1_abcd   11    6</span>
 outfn =<span class="st"> </span><span class="kw">tempfile</span>()
 x3 &lt;-<span class="st"> </span><span class="kw">merge_table_files</span>(<span class="dt">files_dir =</span> <span class="kw">tempdir</span>(), <span class="dt">pattern =</span> <span class="st">&quot;.*_abcd$&quot;</span>, <span class="dt">outfn =</span> outfn)
 <span class="kw">head</span>(<span class="kw">read.table</span>(outfn, <span class="dt">sep =</span> <span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>))
 <span class="co">#&gt;                                filename col1 col2</span>
-<span class="co">#&gt; 1 /tmp/RtmpCymI5f/filefa3b4644f1ed_abcd    1    2</span>
-<span class="co">#&gt; 2 /tmp/RtmpCymI5f/filefa3b4644f1ed_abcd    2    3</span>
-<span class="co">#&gt; 3 /tmp/RtmpCymI5f/filefa3b4644f1ed_abcd    3    4</span>
-<span class="co">#&gt; 4 /tmp/RtmpCymI5f/filefa3b4644f1ed_abcd    4    5</span>
-<span class="co">#&gt; 5 /tmp/RtmpCymI5f/filefa3b4644f1ed_abcd    5    6</span>
-<span class="co">#&gt; 6 /tmp/RtmpCymI5f/filefa3b4644f1ed_abcd    6    7</span></code></pre>
+<span class="co">#&gt; 1 /tmp/RtmpUrg5Db/file18ba912b1fa1_abcd    6    1</span>
+<span class="co">#&gt; 2 /tmp/RtmpUrg5Db/file18ba912b1fa1_abcd    7    2</span>
+<span class="co">#&gt; 3 /tmp/RtmpUrg5Db/file18ba912b1fa1_abcd    8    3</span>
+<span class="co">#&gt; 4 /tmp/RtmpUrg5Db/file18ba912b1fa1_abcd    9    4</span>
+<span class="co">#&gt; 5 /tmp/RtmpUrg5Db/file18ba912b1fa1_abcd   10    5</span>
+<span class="co">#&gt; 6 /tmp/RtmpUrg5Db/file18ba912b1fa1_abcd   11    6</span></code></pre>
 </div>
 <div id="data-filtration" class="section level3">
 <h3>Data filtration</h3>
@@ -246,8 +246,8 @@ x3 &lt;-<span class="st"> </span><span class="kw">merge_table_files</span>(<span
 <pre class="sourceCode r"><code class="sourceCode r">demo_file &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;demo/proteinpaint/fusions2pp_fusioncatcher.txt&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;ngstk&quot;</span>)
 input_data &lt;-<span class="st"> </span><span class="kw">read.table</span>(demo_file, <span class="dt">sep =</span> <span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)
 <span class="co"># Get data subset according the defined rule</span>
-mhander_extra_params =<span class="st"> </span><span class="kw">list</span>(<span class="dt">gene_5 =</span> <span class="dv">1</span>, <span class="dt">gene_3 =</span> <span class="dv">2</span>, <span class="dt">any_gene =</span> <span class="st">&quot;TCF3&quot;</span>, <span class="dt">fusions_any_match_flag =</span> <span class="ot">TRUE</span>)
-result_1 &lt;-<span class="st"> </span><span class="kw">fusions_filter</span>(input_data, <span class="dt">mhander_extra_params =</span> mhander_extra_params)
+mhandler_extra_params =<span class="st"> </span><span class="kw">list</span>(<span class="dt">gene_5 =</span> <span class="dv">1</span>, <span class="dt">gene_3 =</span> <span class="dv">2</span>, <span class="dt">any_gene =</span> <span class="st">&quot;TCF3&quot;</span>, <span class="dt">fusions_any_match_flag =</span> <span class="ot">TRUE</span>)
+result_1 &lt;-<span class="st"> </span><span class="kw">fusions_filter</span>(input_data, <span class="dt">mhandler_extra_params =</span> mhandler_extra_params)
 <span class="kw">head</span>(result_1)
 <span class="co">#&gt;   gene5 gene3             fusion_type</span>
 <span class="co">#&gt; 1  TCF3  PBX1                in-frame</span>
@@ -256,28 +256,28 @@ result_1 &lt;-<span class="st"> </span><span class="kw">fusions_filter</span>(in
 <span class="co">#&gt; 4  TCF3  PBX1 CDS(truncated)/intronic</span>
 <span class="co">#&gt; 5  TCF3  PBX1 CDS(truncated)/intronic</span>
 
-mhander_extra_params =<span class="st"> </span><span class="kw">list</span>(<span class="dt">gene_3 =</span> <span class="dv">2</span>, <span class="dt">right_gene =</span> <span class="st">&quot;GYPA&quot;</span>, <span class="dt">fusions_right_match_flag =</span> <span class="ot">TRUE</span>)
-result_2 &lt;-<span class="st"> </span><span class="kw">fusions_filter</span>(input_data, <span class="dt">mhander_extra_params =</span> mhander_extra_params)
+mhandler_extra_params =<span class="st"> </span><span class="kw">list</span>(<span class="dt">gene_3 =</span> <span class="dv">2</span>, <span class="dt">right_gene =</span> <span class="st">&quot;GYPA&quot;</span>, <span class="dt">fusions_right_match_flag =</span> <span class="ot">TRUE</span>)
+result_2 &lt;-<span class="st"> </span><span class="kw">fusions_filter</span>(input_data, <span class="dt">mhandler_extra_params =</span> mhandler_extra_params)
 <span class="kw">head</span>(result_2)
 <span class="co">#&gt;   gene5 gene3 fusion_type</span>
 <span class="co">#&gt; 6  GYPE  GYPA    in-frame</span>
 <span class="co">#&gt; 7  GYPE  GYPA    in-frame</span>
 
-mhander_extra_params =<span class="st"> </span><span class="kw">list</span>(<span class="dt">gene_5 =</span> <span class="dv">1</span>, <span class="dt">left_gene =</span> <span class="st">&quot;GYPA&quot;</span>, <span class="dt">fusions_left_match_flag =</span> <span class="ot">TRUE</span>)
-result_3 &lt;-<span class="st"> </span><span class="kw">fusions_filter</span>(input_data, <span class="dt">mhander_extra_params =</span> mhander_extra_params)
+mhandler_extra_params =<span class="st"> </span><span class="kw">list</span>(<span class="dt">gene_5 =</span> <span class="dv">1</span>, <span class="dt">left_gene =</span> <span class="st">&quot;GYPA&quot;</span>, <span class="dt">fusions_left_match_flag =</span> <span class="ot">TRUE</span>)
+result_3 &lt;-<span class="st"> </span><span class="kw">fusions_filter</span>(input_data, <span class="dt">mhandler_extra_params =</span> mhandler_extra_params)
 <span class="kw">head</span>(result_3)
 <span class="co">#&gt; [1] gene5       gene3       fusion_type</span>
 <span class="co">#&gt; &lt;0 rows&gt; (or 0-length row.names)</span>
 
-mhander_extra_params =<span class="st"> </span><span class="kw">list</span>(<span class="dt">gene_5 =</span> <span class="dv">1</span>, <span class="dt">gene_3 =</span> <span class="dv">2</span>, <span class="dt">left_gene =</span> <span class="st">&quot;GYPE&quot;</span>, <span class="dt">right_gene =</span> <span class="st">&quot;GYPA&quot;</span>, <span class="dt">fusions_full_match_flag =</span> <span class="ot">TRUE</span>)
-result_4 &lt;-<span class="st"> </span><span class="kw">fusions_filter</span>(input_data, <span class="dt">mhander_extra_params =</span> mhander_extra_params)
+mhandler_extra_params =<span class="st"> </span><span class="kw">list</span>(<span class="dt">gene_5 =</span> <span class="dv">1</span>, <span class="dt">gene_3 =</span> <span class="dv">2</span>, <span class="dt">left_gene =</span> <span class="st">&quot;GYPE&quot;</span>, <span class="dt">right_gene =</span> <span class="st">&quot;GYPA&quot;</span>, <span class="dt">fusions_full_match_flag =</span> <span class="ot">TRUE</span>)
+result_4 &lt;-<span class="st"> </span><span class="kw">fusions_filter</span>(input_data, <span class="dt">mhandler_extra_params =</span> mhandler_extra_params)
 <span class="kw">head</span>(result_4)
 <span class="co">#&gt;   gene5 gene3 fusion_type</span>
 <span class="co">#&gt; 6  GYPE  GYPA    in-frame</span>
 <span class="co">#&gt; 7  GYPE  GYPA    in-frame</span>
 
-mhander_extra_params =<span class="st"> </span><span class="kw">list</span>(<span class="dt">gene_5 =</span> <span class="dv">1</span>, <span class="dt">gene_3 =</span> <span class="dv">2</span>, <span class="dt">left_gene =</span> <span class="st">&quot;GYPE&quot;</span>, <span class="dt">right_gene =</span> <span class="st">&quot;GYPA&quot;</span>, <span class="dt">fusions_anyfull_match_flag =</span> <span class="ot">TRUE</span>)
-result_5 &lt;-<span class="st"> </span><span class="kw">fusions_filter</span>(input_data, <span class="dt">mhander_extra_params =</span> mhander_extra_params)
+mhandler_extra_params =<span class="st"> </span><span class="kw">list</span>(<span class="dt">gene_5 =</span> <span class="dv">1</span>, <span class="dt">gene_3 =</span> <span class="dv">2</span>, <span class="dt">left_gene =</span> <span class="st">&quot;GYPE&quot;</span>, <span class="dt">right_gene =</span> <span class="st">&quot;GYPA&quot;</span>, <span class="dt">fusions_anyfull_match_flag =</span> <span class="ot">TRUE</span>)
+result_5 &lt;-<span class="st"> </span><span class="kw">fusions_filter</span>(input_data, <span class="dt">mhandler_extra_params =</span> mhandler_extra_params)
 <span class="kw">head</span>(result_5)
 <span class="co">#&gt;   gene5 gene3 fusion_type</span>
 <span class="co">#&gt; 6  GYPE  GYPA    in-frame</span>
@@ -293,26 +293,26 @@ file_b &lt;-<span class="st"> </span><span class="kw">tempfile</span>()
 x &lt;-<span class="st"> </span><span class="kw">get_files_mtime</span>(<span class="dt">input_files =</span> <span class="kw">c</span>(file_a, file_b))
 x
 <span class="co">#&gt; $files_mtime</span>
-<span class="co">#&gt; [1] &quot;2017-11-27 18:45:28 CST&quot; &quot;2017-11-27 18:45:28 CST&quot;</span>
+<span class="co">#&gt; [1] &quot;2018-01-04 15:32:52 CST&quot; &quot;2018-01-04 15:32:52 CST&quot;</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $status</span>
 <span class="co">#&gt; [1] TRUE</span>
 x &lt;-<span class="st"> </span><span class="kw">get_files_mtime</span>(<span class="dt">input_files =</span> <span class="kw">c</span>(file_a, file_b), <span class="dt">return_check =</span> <span class="ot">FALSE</span>)
 x
-<span class="co">#&gt; [1] &quot;2017-11-27 18:45:28 CST&quot; &quot;2017-11-27 18:45:28 CST&quot;</span>
+<span class="co">#&gt; [1] &quot;2018-01-04 15:32:52 CST&quot; &quot;2018-01-04 15:32:52 CST&quot;</span>
 x &lt;-<span class="st"> </span><span class="kw">get_files_mtime</span>(<span class="dt">input_files =</span> <span class="kw">c</span>(file_a, file_b), <span class="dt">return_mtime =</span> <span class="ot">FALSE</span>)
 x
 <span class="co">#&gt; [1] TRUE</span>
 x &lt;-<span class="st"> </span><span class="kw">get_files_ctime</span>(<span class="dt">input_files =</span> <span class="kw">c</span>(file_a, file_b))
 x
 <span class="co">#&gt; $files_ctime</span>
-<span class="co">#&gt; [1] &quot;2017-11-27 18:45:28 CST&quot; &quot;2017-11-27 18:45:28 CST&quot;</span>
+<span class="co">#&gt; [1] &quot;2018-01-04 15:32:52 CST&quot; &quot;2018-01-04 15:32:52 CST&quot;</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $status</span>
 <span class="co">#&gt; [1] TRUE</span>
 x &lt;-<span class="st"> </span><span class="kw">get_files_ctime</span>(<span class="dt">input_files =</span> <span class="kw">c</span>(file_a, file_b), <span class="dt">return_check =</span> <span class="ot">FALSE</span>)
 x
-<span class="co">#&gt; [1] &quot;2017-11-27 18:45:28 CST&quot; &quot;2017-11-27 18:45:28 CST&quot;</span></code></pre>
+<span class="co">#&gt; [1] &quot;2018-01-04 15:32:52 CST&quot; &quot;2018-01-04 15:32:52 CST&quot;</span></code></pre>
 </div>
 <div id="split-data" class="section level3">
 <h3>Split data</h3>
@@ -477,7 +477,305 @@ dat &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class
 outfn &lt;-<span class="st"> </span><span class="kw">tempfile</span>()
 <span class="kw">write.table</span>(dat, outfn, <span class="dt">sep =</span> <span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>)
 <span class="kw">split_row_file</span>(outfn)
-<span class="co">#&gt; [1] 101</span></code></pre>
+<span class="co">#&gt; $`1`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_1&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`2`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_2&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`3`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_3&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`4`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_4&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`5`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_5&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`6`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_6&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`7`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_7&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`8`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_8&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`9`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_9&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`10`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_10&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`11`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_11&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`12`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_12&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`13`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_13&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`14`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_14&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`15`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_15&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`16`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_16&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`17`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_17&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`18`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_18&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`19`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_19&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`20`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_20&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`21`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_21&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`22`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_22&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`23`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_23&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`24`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_24&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`25`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_25&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`26`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_26&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`27`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_27&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`28`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_28&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`29`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_29&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`30`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_30&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`31`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_31&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`32`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_32&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`33`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_33&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`34`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_34&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`35`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_35&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`36`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_36&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`37`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_37&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`38`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_38&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`39`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_39&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`40`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_40&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`41`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_41&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`42`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_42&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`43`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_43&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`44`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_44&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`45`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_45&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`46`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_46&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`47`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_47&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`48`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_48&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`49`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_49&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`50`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_50&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`51`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_51&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`52`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_52&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`53`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_53&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`54`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_54&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`55`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_55&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`56`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_56&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`57`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_57&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`58`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_58&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`59`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_59&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`60`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_60&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`61`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_61&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`62`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_62&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`63`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_63&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`64`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_64&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`65`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_65&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`66`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_66&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`67`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_67&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`68`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_68&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`69`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_69&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`70`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_70&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`71`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_71&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`72`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_72&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`73`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_73&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`74`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_74&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`75`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_75&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`76`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_76&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`77`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_77&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`78`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_78&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`79`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_79&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`80`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_80&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`81`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_81&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`82`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_82&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`83`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_83&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`84`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_84&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`85`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_85&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`86`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_86&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`87`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_87&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`88`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_88&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`89`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_89&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`90`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_90&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`91`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_91&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`92`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_92&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`93`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_93&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`94`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_94&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`95`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_95&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`96`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_96&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`97`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_97&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`98`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_98&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`99`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_99&quot;</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`100`</span>
+<span class="co">#&gt; [1] &quot;/tmp/RtmpUrg5Db/file18ba964c4e8a6_split_100&quot;</span></code></pre>
 </div>
 <div id="filename-process" class="section level3">
 <h3>Filename Process</h3>
@@ -489,11 +787,11 @@ pattern &lt;-<span class="st"> '*.txt'</span>
 <span class="co">#&gt; [5] &quot;hg38-common-circrna.txt&quot;</span>
 x &lt;-<span class="st"> </span><span class="kw">format_filenames</span>(<span class="dt">files_dir =</span> files_dir, <span class="dt">pattern =</span> pattern, <span class="dt">profix =</span> <span class="st">'hg38_'</span>)
 x
-<span class="co">#&gt; [1] &quot;/tmp/Rtmpz7difm/Rbuildfa2b68782b85/ngstk/vignettes/hg38_cancer_circrna.txt&quot;    </span>
-<span class="co">#&gt; [2] &quot;/tmp/Rtmpz7difm/Rbuildfa2b68782b85/ngstk/vignettes/hg38_common_circrna.txt&quot;    </span>
-<span class="co">#&gt; [3] &quot;/tmp/Rtmpz7difm/Rbuildfa2b68782b85/ngstk/vignettes/hg38_cancer_circrna_mre.txt&quot;</span>
-<span class="co">#&gt; [4] &quot;/tmp/Rtmpz7difm/Rbuildfa2b68782b85/ngstk/vignettes/hg38_cancer_circrna.txt&quot;    </span>
-<span class="co">#&gt; [5] &quot;/tmp/Rtmpz7difm/Rbuildfa2b68782b85/ngstk/vignettes/hg38_common_circrna.txt&quot;</span></code></pre>
+<span class="co">#&gt; [1] &quot;/tmp/Rtmpd5dOjG/Rbuild18b98691c488a/ngstk/vignettes/hg38_cancer_circrna.txt&quot;    </span>
+<span class="co">#&gt; [2] &quot;/tmp/Rtmpd5dOjG/Rbuild18b98691c488a/ngstk/vignettes/hg38_common_circrna.txt&quot;    </span>
+<span class="co">#&gt; [3] &quot;/tmp/Rtmpd5dOjG/Rbuild18b98691c488a/ngstk/vignettes/hg38_cancer_circrna_mre.txt&quot;</span>
+<span class="co">#&gt; [4] &quot;/tmp/Rtmpd5dOjG/Rbuild18b98691c488a/ngstk/vignettes/hg38_cancer_circrna.txt&quot;    </span>
+<span class="co">#&gt; [5] &quot;/tmp/Rtmpd5dOjG/Rbuild18b98691c488a/ngstk/vignettes/hg38_common_circrna.txt&quot;</span></code></pre>
 </div>
 <div id="colors" class="section level3">
 <h3>Colors</h3>
