@@ -2,15 +2,16 @@
 % Please edit documentation in R/proteinpaint_transefer.R
 \name{fusions2pp}
 \alias{fusions2pp}
-\title{Function to convert fusion data to ProteinPaint \url{https://pecan.stjude.org/pp} input format.}
+\title{Function to convert fusion data to ProteinPaint format.}
 \usage{
 fusions2pp(input_data, input_type = "fusioncatcher",
-  config_file = system.file("extdata", "config/proteinpaint.toml", package =
-  "ngstk"), config_list = NULL, handler_confg_file = system.file("extdata",
-  "config/handler.toml", package = "ngstk"),
-  mhandler_confg_file = system.file("extdata", "config/mhandler.toml", package
-  = "ngstk"), handler_funs = NULL, mhandler_funs = NULL,
-  handler_extra_params = NULL, mhandler_extra_params = NULL, outfn = NULL)
+  config_file = system.file("extdata", "config/proteinpaint.toml",
+  package = "ngstk"), config_list = NULL,
+  handler_confg_file = system.file("extdata", "config/handler.toml",
+  package = "ngstk"), mhandler_confg_file = system.file("extdata",
+  "config/mhandler.toml", package = "ngstk"), handler_funs = NULL,
+  mhandler_funs = NULL, handler_extra_params = NULL,
+  mhandler_extra_params = NULL, outfn = NULL)
 }
 \arguments{
 \item{input_data}{A gene fusions data.frame need to be converted to ProteinPaint input.}
@@ -45,7 +46,7 @@ default is NULL and get value from config_file}
 A data frame
 }
 \description{
-Function to convert fusion data to ProteinPaint \url{https://pecan.stjude.org/pp} input format.
+Function to convert fusion data to ProteinPaint format.
 }
 \examples{
 demo_file <- system.file('extdata', 

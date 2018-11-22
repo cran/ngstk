@@ -2,16 +2,17 @@
 % Please edit documentation in R/cbioportal_trasefer.R
 \name{muts2mutation_mapper}
 \alias{muts2mutation_mapper}
-\title{Function to convert mutation data to MutationMapper
-\url{http://www.cbioportal.org/mutation_mapper.jsp} input format.}
+\title{Function to convert mutation data to cbioportal MutationMapper
+format.}
 \usage{
 muts2mutation_mapper(input_data, input_type = "iseq",
-  config_file = system.file("extdata", "config/cbioportal.toml", package =
-  "ngstk"), config_list = NULL, handler_confg_file = system.file("extdata",
-  "config/handler.toml", package = "ngstk"),
-  mhandler_confg_file = system.file("extdata", "config/mhandler.toml", package
-  = "ngstk"), handler_funs = NULL, mhandler_funs = NULL,
-  handler_extra_params = NULL, mhandler_extra_params = NULL, outfn = NULL)
+  config_file = system.file("extdata", "config/cbioportal.toml", package
+  = "ngstk"), config_list = NULL,
+  handler_confg_file = system.file("extdata", "config/handler.toml",
+  package = "ngstk"), mhandler_confg_file = system.file("extdata",
+  "config/mhandler.toml", package = "ngstk"), handler_funs = NULL,
+  mhandler_funs = NULL, handler_extra_params = NULL,
+  mhandler_extra_params = NULL, outfn = NULL)
 }
 \arguments{
 \item{input_data}{A mutation data.frame need to be converted to ProteinPaint input.}
@@ -46,8 +47,8 @@ default is NULL and get value from config_file}
 A data frame
 }
 \description{
-Function to convert mutation data to MutationMapper
-\url{http://www.cbioportal.org/mutation_mapper.jsp} input format.
+Function to convert mutation data to cbioportal MutationMapper
+format.
 }
 \examples{
 demo_file <- system.file('extdata', 

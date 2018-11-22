@@ -1,18 +1,35 @@
-# [![Build Status](https://travis-ci.org/JhuangLab/ngstk.svg)](https://travis-ci.org/JhuangLab/ngstk) [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat)](https://en.wikipedia.org/wiki/MIT_License) [![CRAN](http://www.r-pkg.org/badges/version/ngstk)](https://cran.r-project.org/package=ngstk) [![Downloads](http://cranlogs.r-pkg.org/badges/ngstk?color=brightgreen)](http://www.r-pkg.org/pkg/ngstk) [![codecov](https://codecov.io/github/JhuangLab/ngstk/branch/master/graphs/badge.svg)](https://codecov.io/github/JhuangLab/ngstk)
 
-ngstk package
-==============
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+# ngstk <img src="man/figures/logo.png" align="right" />
+
+[![Build
+Status](https://travis-ci.org/JhuangLab/ngstk.svg)](https://travis-ci.org/JhuangLab/ngstk)
+[![License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat)](https://en.wikipedia.org/wiki/MIT_License)
+[![CRAN](http://www.r-pkg.org/badges/version/ngstk)](https://cran.r-project.org/package=ngstk)
+[![Downloads](http://cranlogs.r-pkg.org/badges/ngstk?color=brightgreen)](http://www.r-pkg.org/pkg/ngstk)
+[![codecov](https://codecov.io/github/JhuangLab/ngstk/branch/master/graphs/badge.svg)](https://codecov.io/github/JhuangLab/ngstk)
 
 ## Introduction
 
-The R package [ngstk](https://github.com/JhuangLab/ngstk) can be used to facilitate the analysis of NGS data, such as visualization, conversion of the data format for WEB service input and another purpose.
+The R package [ngstk](https://github.com/JhuangLab/ngstk) can be used to
+facilitate the analysis of NGS data, such as visualization, conversion
+of the data format for WEB service input and another purpose.
 
-In NGS data analysis process, a few of duplicated small scripts, colors theme always be created by us. In most cases, we can't use it in the future if we don't remember when and where the script be created. [ngstk](https://github.com/JhuangLab/ngstk) is a framework that can be used to collect small script, colors theme and other should be packaged material.
+In NGS data analysis process, a few of duplicated small scripts, colors
+theme always be created by us. In most cases, we can’t use it in the
+future if we don’t remember when and where the script be created.
+[ngstk](https://github.com/JhuangLab/ngstk) is a framework that can be
+used to collect small script, colors theme and other should be packaged
+material.
 
-The purples of ngstk is that help us to manage those small scripts systematically, store some of the useful material for NGS data analysis.
-Especially, data visualization, conversion of data format and various database ID were the mainly mission in the recently development cycle.
+The purples of ngstk is that help us to manage those small scripts
+systematically, store some of the useful material for NGS data analysis.
+Especially, data visualization, conversion of data format and various
+database ID were the mainly mission in the recently development cycle.
 
-A simple guide can be found in [here](https://CRAN.R-project.org/package=ngstk/vignettes/ngstk.html).
+A simple guide can be found in
+[here](https://CRAN.R-project.org/package=ngstk/vignettes/ngstk.html).
 
 ## Installation
 
@@ -33,15 +50,16 @@ devtools::install_github("JhuangLab/ngstk")
 
 ### Zip/Tarball
 
-1. Download the appropriate zip file or tar.gz file from Github
-2. Unzip the file and change directories into the configr directory
-3. Run `R CMD INSTALL pkg`
+1.  Download the appropriate zip file or tar.gz file from Github
+2.  Unzip the file and change directories into the configr directory
+3.  Run `R CMD INSTALL
+pkg`
 
 ## Usage
 
 ### Data format conversion
 
-```r
+``` r
 demo_file <- system.file("extdata", "demo/proteinpaint/muts2pp_iseq.txt", package = "ngstk")
 input_data <- read.table(demo_file, sep = "\t", header = TRUE, stringsAsFactors = FALSE)
 disease <- "T-ALL"
@@ -68,7 +86,7 @@ hander_data <- fusions2pp_meta(input_data, input_type = 'fusioncatcher')
 
 ### Data filtration
 
-```r
+``` r
 demo_file <- system.file("extdata", "demo/proteinpaint/fusions2pp_fusioncatcher.txt", package = "ngstk")
 input_data <- read.table(demo_file, sep = "\t", header = TRUE, stringsAsFactors = FALSE)
 # Get data subset according the defined rule
@@ -88,9 +106,9 @@ mhander_extra_params = list(gene_5 = 1, gene_3 = 2, left_gene = "GYPE", right_ge
 result_5 <- fusions_filter(input_data, mhander_extra_params = mhander_extra_params)
 ```
 
-### Mtime and Ctime
+### Times
 
-```r
+``` r
 file_a <- tempfile()
 file_b <- tempfile()
 file.create(c(file_a, file_b))
@@ -99,11 +117,14 @@ x2 <- get_files_mtime(input_files = c(file_a, file_b), return_check = FALSE)
 x3 <- get_files_mtime(input_files = c(file_a, file_b), return_mtime = FALSE)
 x4 <- get_files_ctime(input_files = c(file_a, file_b))
 x5 <- get_files_ctime(input_files = c(file_a, file_b), return_check = FALSE)
+
+# time stamp
+time_stamp()
 ```
 
 ### Data split
 
-```r
+``` r
 x1 <- data.frame(col1 = 1:39, col2 = 1:39)
 x <- split_row_data(x1, sections = 2)
 x <- split_row_data(x1, sections = 3)
@@ -120,16 +141,53 @@ split_row_file(outfn, use_system_split = TRUE)
 
 ### Filename Process
 
-```r
+``` r
 files_dir <- system.file('extdata', 'demo/format', package = 'ngstk')
 pattern <- '*.txt'
 list.files(files_dir, pattern)
 x <- format_filenames(files_dir = files_dir, pattern = pattern, profix = 'hg38_')
 ```
 
+### Command line utils functions
+
+``` r
+# Collect command line bins files in R package
+rbin('ngstk', tempdir())
+
+# Print sub commands
+option_list <- list(
+  make_option(c('-l', '--list-all-subcmds'), action = 'store_true',
+               default = FALSE, help = 'Print all supported subcmds of ngsjs.')
+ )
+subcmds_list <- list(subcmd1 = 'Use method 1 to plot boxplot',
+                      subcmd2 = 'Use method 2 to plot boxplot')
+ description <- 'Method to plot boxplot'
+ usage <- 'usage: %prog [options] [params]'
+ opt_parser_obj <- opt_parser(subcmds_list = subcmds_list,
+                             option_list = option_list,
+                             description = description,
+                             usage = usage)
+
+# Print the command line message
+# You can define the message order use 
+# paramter help_order = c("description", "usage", "options", "subcmds", "epilogue"
+print_help(opt_parser_obj)
+```
+
+### Download functions
+
+``` r
+# Use future package to parallel download urls with logs
+urls <- c(paste0('https://raw.githubusercontent.com/',
+ 'Miachol/ftp/master/files/images/bioinstaller/maftools3.png'), 
+ paste0('https://raw.githubusercontent.com/',
+ 'Miachol/ftp/master/files/images/bioinstaller/maftools4.png'))
+ par_download(urls, sprintf('%s/%s', tempdir(), basename(urls)))
+```
+
 ### Colors
 
-```r
+``` r
 set_colors('default')
 set_colors('proteinpaint_mutations')
 set_colors('proteinpaint_chromHMM_state')
@@ -137,25 +195,44 @@ set_colors('proteinpaint_chromHMM_state')
 
 ## Tools
 
-Some of experimental or unpacked scripts or tools for NGS data analysis will be collected in ngstk package. A defined markdown document will tell you how to use it, such as [QualityConfirm](https://github.com/JhuangLab/ngstk/tree/master/inst/extdata/tools/QualityConfirm/README.md) and [gvmap](https://github.com/JhuangLab/ngstk/tree/master/inst/extdata/tools/gvmap/).
+Some of experimental or unpacked scripts or tools for NGS data analysis
+will be collected in ngstk package. A defined markdown document will
+tell you how to use it, such as
+[QualityConfirm](https://github.com/JhuangLab/ngstk/tree/master/inst/extdata/tools/QualityConfirm/README.md)
+and
+[gvmap](https://github.com/JhuangLab/ngstk/tree/master/inst/extdata/tools/gvmap/).
 
 ### QualityConfirm
 
-[QualityConfirm](https://github.com/JhuangLab/ngstk/tree/master/inst/extdata/tools/QualityConfirm/) is a quality control tool for gene panel sequencing data. Usage of QualityConfirm can be found in [QualityConfirm](https://github.com/JhuangLab/ngstk/tree/master/inst/extdata/tools/QualityConfirm/README.md) and the [demo](https://github.com/JhuangLab/ngstk/tree/master/inst/extdata/tools/QualityConfirm/demo.R) can help you to use it more easily.
+[QualityConfirm](https://github.com/JhuangLab/ngstk/tree/master/inst/extdata/tools/QualityConfirm/)
+is a quality control tool for gene panel sequencing data. Usage of
+QualityConfirm can be found in
+[QualityConfirm](https://github.com/JhuangLab/ngstk/tree/master/inst/extdata/tools/QualityConfirm/README.md)
+and the
+[demo](https://github.com/JhuangLab/ngstk/tree/master/inst/extdata/tools/QualityConfirm/demo.R)
+can help you to use it more
+easily.
 
-![](https://github.com/Miachol/ftp/raw/master/files/images/quality_confirm_fig1.png)
+![](man/figures/quality_confirm_fig1.jpg)
 
 ### gvmap
 
-[gvmap](https://github.com/JhuangLab/ngstk/tree/master/inst/extdata/tools/gvmap/) is an R package to draw mutations and fusions heatmap. It relies on *configr*, *rsvg* R package. This package is an external tool that will be develop independently by [ytdai](https://github.com/ytdai/gvmap).
+[gvmap](https://github.com/JhuangLab/ngstk/tree/master/inst/extdata/tools/gvmap/)
+is an R package to draw mutations and fusions heatmap. It relies on
+*configr*, *rsvg* R package. This package is an external tool that will
+be develop independently by [ytdai](https://github.com/ytdai/gvmap).
 
-![](https://github.com/Miachol/ftp/raw/master/files/images/gvmap_fig1.png)
+![](man/figures/gvmap_fig1.png)
 
 ## Theme
 
-ngstk provide some of defined colors [theme](https://github.com/JhuangLab/ngstk/blob/master/inst/extdata/config/theme.toml), you can directly [download](https://raw.githubusercontent.com/JhuangLab/ngstk/master/inst/extdata/config/theme.toml) it.
+ngstk provide some of defined colors
+[theme](https://github.com/JhuangLab/ngstk/blob/master/inst/extdata/config/theme.toml),
+you can directly
+[download](https://raw.githubusercontent.com/JhuangLab/ngstk/master/inst/extdata/config/theme.toml)
+it.
 
-```toml
+``` toml
 Title = "ngstk theme configuration file (colors)"
 
 [default]

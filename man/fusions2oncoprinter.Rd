@@ -2,16 +2,17 @@
 % Please edit documentation in R/cbioportal_trasefer.R
 \name{fusions2oncoprinter}
 \alias{fusions2oncoprinter}
-\title{Function to convert mutation data to Oncoprinter
-\url{http://www.cbioportal.org/oncoprinter.jsp} input format.}
+\title{Function to convert fusion data to cbioportal Oncoprinter
+format.}
 \usage{
 fusions2oncoprinter(input_data, input_type = "fusioncatcher",
-  config_file = system.file("extdata", "config/cbioportal.toml", package =
-  "ngstk"), config_list = NULL, handler_confg_file = system.file("extdata",
-  "config/handler.toml", package = "ngstk"),
-  mhandler_confg_file = system.file("extdata", "config/mhandler.toml", package
-  = "ngstk"), handler_funs = NULL, mhandler_funs = NULL,
-  handler_extra_params = NULL, mhandler_extra_params = NULL, outfn = NULL)
+  config_file = system.file("extdata", "config/cbioportal.toml", package
+  = "ngstk"), config_list = NULL,
+  handler_confg_file = system.file("extdata", "config/handler.toml",
+  package = "ngstk"), mhandler_confg_file = system.file("extdata",
+  "config/mhandler.toml", package = "ngstk"), handler_funs = NULL,
+  mhandler_funs = NULL, handler_extra_params = NULL,
+  mhandler_extra_params = NULL, outfn = NULL)
 }
 \arguments{
 \item{input_data}{A mutation data.frame need to be converted to ProteinPaint input.}
@@ -46,8 +47,8 @@ default is NULL and get value from config_file}
 A data frame
 }
 \description{
-Function to convert mutation data to Oncoprinter
-\url{http://www.cbioportal.org/oncoprinter.jsp} input format.
+Function to convert fusion data to cbioportal Oncoprinter
+format.
 }
 \examples{
 demo_file <- system.file('extdata', 
